@@ -5,7 +5,7 @@ Searches predefined list of GitHub Users' repositories and GitHub.io pages for s
 
 Here is some documentation for tools/APIs that we will most likely be using:
 
-### [GitHub API](https://developer.github.com/v3/)
+### GitHub's [API](https://developer.github.com/v3/)
 
 Specifically, the [contents](https://developer.github.com/v3/repos/contents/#get-contents) API. This will let us retrieve information about a specific file, given the username, repo, and filename associated with it. I imagine we will use the `download_url` to get the files in raw format in the browser for easy file scraping.
 
