@@ -1,5 +1,5 @@
 # main module for github-scraper app
-
+import requests
 
 # this is not an exhaustive list of functions, will need to add to/refactor architecture of module depending on how we want to implement file access and reading
 
