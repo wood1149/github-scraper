@@ -1,6 +1,12 @@
 # github-scraper
 Searches predefined list of GitHub Users' repositories and GitHub.io pages for sensitive or personal information.
 
+## Usage:
+    1)npm install
+    2)node scrapeUsers.js
+
+    Edit the scrapeUsers file to pick what user will be scraped for their usernames.
+
 ## Resources
 
 Here is some documentation for tools/APIs that we will most likely be using:

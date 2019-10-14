@@ -18,5 +18,8 @@
   "homepage": "https://github.com/wood1149/github-scraper#readme",
   "dependencies": {
     "github-scraper": "^6.8.0"
+  },
+  "devDependencies": {
+    "prettier": "1.18.2"
   }
 }
