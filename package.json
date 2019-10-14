@@ -1,5 +1,5 @@
 {
-  "name": "github-scraper",
+  "name": "infosec-github",
   "version": "1.0.0",
   "description": "infosec project",
   "main": "index.js",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/wood1149/github-scraper/issues"
   },
-  "homepage": "https://github.com/wood1149/github-scraper#readme"
+  "homepage": "https://github.com/wood1149/github-scraper#readme",
+  "dependencies": {
+    "github-scraper": "^6.8.0"
+  }
 }
