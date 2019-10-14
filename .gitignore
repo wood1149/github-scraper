@@ -1,3 +1,4 @@
+
 # Logs
 logs
 *.log
@@ -99,3 +100,7 @@ public
 
 # TernJS port file
 .tern-port
+
+env
+.vscode
+
