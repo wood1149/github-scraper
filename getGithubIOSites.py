@@ -4,6 +4,9 @@ import glob
 import time
 import random
 from random import shuffle
+import os
+import shutil
+
 
 
 # this is not an exhaustive list of functions, will need to add to/refactor architecture of module depending on how we want to implement file access and reading
@@ -17,6 +20,8 @@ def readInUsernames():
         print("reading " + str(file))
         with open(file,"r") as datafile:
             for user in datafile:
+                user = user.replace("\n","")
+                user = user.strip()
                 usernames.add(user)
 
     print("found, " + str(len(usernames)) + " usernames")
@@ -31,13 +36,25 @@ def getAlreadyScrapedUsers():
         usernames.add(file.split("_")[0])
         #print("Foudn " + str(file.split("_")[0]))
     return usernames
+def fixFilenames():
+    #walk through username directory
+    for file in glob.glob("./git2/*.html"):
+
+        if("\\n" in file or "\n" in file):
+            print(r""+file)
+            file2 = file.split("/")[2].replace('\\n','')
+            shutil.move(file,"./githubSiteData/"+file2)
 
 def requestIOSite(username):
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
     url = 'https://'+username.strip()+'.github.io'
     print(username)
     print("\t" + url)
-    response = requests.get(url,headers=headers)
+    try:
+        response = requests.get(url,headers=headers)
+    except requests.exceptions.ConnectionError as e:
+        print("CONNECTION ERROR...Sleeping 5 minutes")
+        time.sleep(5*60)
     if(response.status_code == 200):
         #valid site
         print("\t(res): VALID")
@@ -48,6 +65,8 @@ def requestIOSite(username):
         return False
 
 if __name__ == '__main__':
+    #fixFilenames()
+    #exit(1)
     userSet = readInUsernames()
     listOfUsernames = getAlreadyScrapedUsers()
     print("Scraped " + str(len(listOfUsernames))+ " previously")
@@ -59,7 +78,6 @@ if __name__ == '__main__':
     #scrapes each user
     scrapecount = 0
     for user in userSet:
-
         if(user in listOfUsernames):
             continue
 
