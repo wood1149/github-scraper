@@ -27,15 +27,45 @@ def get_user_repos(username):
 
     return response.json()
 
-def get_repo_files(username, repo):
-    # TODO: implement
-    return
+def get_repo_files(username, repo_name, path=''):
+    """Gets list of public repositories owned by a particular user
+    
+        [:param `username`] the String representation of the user's username
+        [:param `repo_name`] the String representation of the name of a repository
+        [:param `path`] the String representation of the path of a directory within a repository. Used in recursive calls.
+        
+        [:rtype] `list` of dictionaries
+        
+        [:returns] a list of all the files from a given user's repository
+    """
+
+    all_files = []
+    url = f'{BASE_URL}/repos/{username}/{repo_name}/contents/{path}'
+
+    try:
+        response = requests.get(url)
+        res = response.json()
+
+        # Recursively call get_repo_files on directories
+        for r in res:
+            if r['type'] == 'dir':
+                all_files.extend(get_repo_files(username, repo_name, r['path']))
+            else:
+                all_files.append(r)
+
+    except requests.HTTPError as e:
+        sys.exit(e)
+
+    return all_files
+
 
 def find_match(username, repo, file, pattern):
     # TODO: implement
     return
 
-repos = get_user_repos('kklose23')
+username = 'kklose23'
+
+repos = get_user_repos(username)
 
 print(f'Num repos: {len(repos)}')
 
@@ -47,3 +77,12 @@ for repo in repos[0:5]:
     count = repo['stargazers_count']
     name = repo['name']
     print(f'{count}: {name}')
+    contents = get_repo_files(username, name)
+    for c in contents:
+        filename = c['name']
+        html_url = c['html_url']
+        download_url = c['download_url']
+        
+        print(f'\tFile Name: {filename}')
+        print(f'\tHTML URL: {html_url}')
+        print(f'\tDownload URL: {download_url}\n')
