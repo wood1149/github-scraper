@@ -13,7 +13,7 @@ const gs = require("github-scraper");
 const fs = require("fs");
 
 //EDIT THESE
-let usernameToScrape = "arunoda"
+let usernameToScrape = "GrahamCampbell"
 let numUsersToScrape = 1000
 
 //Main Code
