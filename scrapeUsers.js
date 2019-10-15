@@ -44,7 +44,7 @@ const getOnePage = url => {
 };
 
 //makes a request every 10 seconds
-const recGet = () => {
+const intervalGet = () => {
     let inter = setInterval(() => {
         getOnePage(nxurl);
         if (userCounter > numUsersToScrape) {
@@ -56,7 +56,7 @@ const recGet = () => {
     }, 10000);
 };
 
-recGet();
+intervalGet();
 
 
 
