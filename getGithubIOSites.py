@@ -55,6 +55,7 @@ def requestIOSite(username):
     except requests.exceptions.ConnectionError as e:
         print("CONNECTION ERROR...Sleeping 5 minutes")
         time.sleep(5*60)
+        return -1
     if(response.status_code == 200):
         #valid site
         print("\t(res): VALID")
@@ -67,6 +68,7 @@ def requestIOSite(username):
 if __name__ == '__main__':
     #fixFilenames()
     #exit(1)
+    errorcount =0
     userSet = readInUsernames()
     listOfUsernames = getAlreadyScrapedUsers()
     print("Scraped " + str(len(listOfUsernames))+ " previously")
@@ -87,9 +89,14 @@ if __name__ == '__main__':
         if(scrapecount % 50 == 0):
             time.sleep(30)
 
-        time.sleep(random.randint(5,8))
+        time.sleep(random.randint(2,8))
         res = requestIOSite(user)
-        if(res!= False):
+        if(res == -1):
+            errorcount +=1
+            if(errorcount > 10):
+                print("10 connection errors, exiting..")
+                exit(1)
+        elif(res!= False):
             #writes html to file
             with open("./githubIOSites/"+user+"_GithubSiteHTML.html","w+") as outfile:
                 outfile.write(res)
