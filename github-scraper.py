@@ -27,15 +27,25 @@ def get_user_repos(username):
 
     return response.json()
 
-def get_repo_files(username, repo):
-    # TODO: implement
-    return
+def get_repo_files(username, repo_name):
+    url = f'{BASE_URL}/repos/{username}/{repo_name}/contents'
+
+    try:
+        response = requests.get(url)
+        print(response.status_code)
+        response.raise_for_status()
+    except requests.HTTPError as e:
+        sys.exit(e)
+
+    return response.json()
 
 def find_match(username, repo, file, pattern):
     # TODO: implement
     return
 
-repos = get_user_repos('kklose23')
+username = 'kklose23'
+
+repos = get_user_repos(username)
 
 print(f'Num repos: {len(repos)}')
 
@@ -47,3 +57,12 @@ for repo in repos[0:5]:
     count = repo['stargazers_count']
     name = repo['name']
     print(f'{count}: {name}')
+    contents = get_repo_files(username, name)
+    for c in contents:
+        filename = c['name']
+        html_url = c['html_url']
+        download_url = c['download_url']
+        
+        print(f'\tFile Name: {filename}')
+        print(f'\tHTML URL: {html_url}')
+        print(f'\tDownload URL: {download_url}\n')
