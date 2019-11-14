@@ -28,7 +28,7 @@ def get_user_repos(username):
     return response.json()
 
 def get_repo_files(username, repo_name, path=''):
-    """Gets list of public repositories owned by a particular user
+    """Gets list of all files for a specific user
     
         [:param `username`] the String representation of the user's username
         [:param `repo_name`] the String representation of the name of a repository
@@ -71,6 +71,10 @@ print(f'Num repos: {len(repos)}')
 
 repos.sort(key=lambda x: x['stargazers_count'], reverse=True)
 
+# Used so script ignores binary files
+# We could do another way later if we don't want to list out all extensions we want
+scrapable_extensions = {'cpp', 'txt', 'py'}
+
 print('Top 5 most starred repos:')
 
 for repo in repos[0:5]:
@@ -84,5 +88,13 @@ for repo in repos[0:5]:
         download_url = c['download_url']
         
         print(f'\tFile Name: {filename}')
-        print(f'\tHTML URL: {html_url}')
         print(f'\tDownload URL: {download_url}\n')
+
+        file_ext = filename.split(".")[-1]
+
+        if file_ext in scrapable_extensions:
+            r = requests.get(download_url)
+            print(r.text)
+        else:
+            print('Binary file')
+
