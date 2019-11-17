@@ -15,8 +15,8 @@ const fs = require("fs");
 //EDIT THESE
 //0, scrape from user
 //1, scrape user followers
-const operation = 1;
-let usernameToScrape = "taylorotwell"
+const operation = 0;
+let usernameToScrape = "orta"
 const originalUser = usernameToScrape
 let numUsersToScrape = 1000
 
