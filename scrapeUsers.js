@@ -13,17 +13,29 @@ const gs = require("github-scraper");
 const fs = require("fs");
 
 //EDIT THESE
-let usernameToScrape = "GrahamCampbell"
+//0, scrape from user
+//1, scrape user followers
+const operation = 1;
+let usernameToScrape = "taylorotwell"
+const originalUser = usernameToScrape
 let numUsersToScrape = 1000
 
 //Main Code
 let bigSet2 = new Set();
 let nxurl = usernameToScrape+"/followers";
 let userCounter = 0;
+let unamesToScrape = [];
+
+
+
+
 
 
 //gets and writes data for a single page of followers
 const getOnePage = url => {
+    if(url == undefined){
+        return;
+    }
     gs(url, (err, data) => {
         let pageUsernames = new Set();
         if (data) {
@@ -33,30 +45,100 @@ const getOnePage = url => {
                 pageUsernames.add(userdata.username);
                 userCounter += 1;
 
-                fs.appendFile("./users_"+numUsersToScrape+"_"+usernameToScrape+"Followers.txt", userdata.username + "\n", err => {
+                fs.appendFile("./usernames/users_"+numUsersToScrape+"_"+usernameToScrape+"Followers.txt", userdata.username + "\n", err => {
                     // In case of a error throw err.
                     if (err) throw err;
                 });
             });
             nxurl = data.next_page;
         }
+
+        if(err){
+            nxurl = undefined
+            console.log("ERROR!")
+            console.log(err)
+        }
+        
     });
+    
 };
 
+
+const hasUserBeenScraped = username =>{
+    let res = false
+     fs.readdirSync("./usernames/").forEach(file => {
+      if(file.includes(username)){
+            console.log('Data for ' + username + " already exists")
+            res = file;
+        }
+    });
+    return res;
+}
+
+
+const getFollowersOfFollowers = () =>{
+    let user = hasUserBeenScraped(usernameToScrape)
+
+    if(user === false){
+        console.log("could not find user")
+        throw "Error"
+    }
+
+    console.log("reading " + "./usernames/"+user)
+    let lines = fs.readFileSync("./usernames/"+user, 'utf-8')
+    .split('\n')
+    .filter(Boolean);
+
+    unamesToScrape = lines;
+    intervalGet();
+}
 //makes a request every 10 seconds
 const intervalGet = () => {
-    let inter = setInterval(() => {
-        getOnePage(nxurl);
-        if (userCounter > numUsersToScrape) {
-            console.log("cleared interval");
-            clearInterval(inter);
-        } else {
-            console.log("running again " + userCounter);
-        }
+    let clInterval = false;
+    let unameIndex = 0
+    if(operation == 1){
+        usernameToScrape = unamesToScrape[unameIndex]
+        nxurl =  usernameToScrape+"/followers";
+    }
+
+
+    if(hasUserBeenScraped(usernameToScrape) !== false && (operation == 0 || operation === 1 && unamesToScrape.length <= unameIndex) ){
+        throw "Data already exists"
+    }else{
+        console.log("Starting to scrape " + usernameToScrape + " " + nxurl)
+        let inter = setInterval(() => {
+
+            if (hasUserBeenScraped(usernameToScrape) !== false || userCounter > numUsersToScrape  || nxurl === undefined ) {
+                console.log("cleared interval " + usernameToScrape);
+                clInterval= true;
+                userCounter = 0;
+                if( operation === 1 && unameIndex < unamesToScrape.length ){
+                    unameIndex++;
+                    usernameToScrape = unamesToScrape[unameIndex];
+                    nxurl = usernameToScrape+"/followers"
+                    console.log("Now scraping from " + usernameToScrape + " " + unameIndex + "/" + unamesToScrape.length)
+                }else{
+                    clearInterval(inter)
+                }
+            } else {
+                console.log("Running again " + userCounter + " " + nxurl);
+                getOnePage(nxurl);
+            }
+
+           
+
     }, 10000);
+    }
+   
+   
 };
 
-intervalGet();
+if(operation === 0){
+    intervalGet();
+}else if(operation === 1){
+    getFollowersOfFollowers();
+}
+
 
 
 
