@@ -59,9 +59,11 @@ def get_repo_files(username, repo_name, path=''):
                 file_ext = filename.split(".")[-1]
 
                 if file_ext in SCRAPABLE_EXTENSIONS:
-                    #r = requests.get(download_url)
+                    file_path = r['path']
+                    file_path = repo_name + '/' + file_path
                     download_url = r['download_url']
-                    repo_files[filename] = download_url
+                    content = requests.get(download_url).text
+                    repo_files[file_path] = content
 
     except requests.HTTPError as e:
         sys.exit(e)
