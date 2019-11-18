@@ -3,8 +3,19 @@ import re
 
 #---BEGIN RSA PRIVATE KEY--- 
 
+# matches emails
+def match_email(line):
+    #https://emailregex.com/
+    email = re.compile(r'(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)')
+    output = re.findall(email,line)  
+    if(len(output) > 0):
+        print("Email found")
+        print(output)
+        return True
+    return False
+
 #matches API keys
-def main(line):
+def match_api_key(line):
     #https://gist.github.com/hsuh/88360eeadb0e8f7136c37fd46a62ee10
     AWSaccessKeyID = re.compile(r'(?<![A-Z0-9])[A-Z0-9]{20}(?![A-Z0-9])')
     AWSsecretAccessKey = re.compile(r'(?<![A-Za-z0-9/+=])[A-Za-z0-9/+=]{40}(?![A-Za-z0-9/+=])')
@@ -43,5 +54,5 @@ def main(line):
         return True
     return False
 
-        
-        
+if __name__ == '__main__':
+    
