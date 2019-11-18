@@ -2,7 +2,7 @@
 import argparse
 
 from sample_module import test, test2
-from APIRegexMatching import matchAPI
+from RegexMatching import matchAPI
 
 # Hardcoded strings, maybe replace with configuration file
 desc = ''
