@@ -1,10 +1,11 @@
-# main module for github-scraper app
 import sys
 import requests
 
 BASE_URL = 'https://api.github.com'
 
-# this is not an exhaustive list of functions, will need to add to/refactor architecture of module depending on how we want to implement file access and reading
+# Used so script ignores binary files
+# We could do another way later if we don't want to list out all extensions we want
+SCRAPABLE_EXTENSIONS = {'cpp', 'txt', 'py', 'config', 'c'}
 
 def get_user_repos(username):
     """Gets list of public repositories owned by a particular user
@@ -20,12 +21,15 @@ def get_user_repos(username):
 
     try:
         response = requests.get(url)
-        print(response.status_code)
         response.raise_for_status()
     except requests.HTTPError as e:
         sys.exit(e)
 
-    return response.json()
+    all_repo_names = []
+    for repo in response.json():
+        all_repo_names.append(repo['name'])
+    return all_repo_names
+
 
 def get_repo_files(username, repo_name, path=''):
     """Gets list of all files for a specific user
@@ -39,7 +43,7 @@ def get_repo_files(username, repo_name, path=''):
         [:returns] a list of all the files from a given user's repository
     """
 
-    all_files = []
+    repo_files = {}
     url = f'{BASE_URL}/repos/{username}/{repo_name}/contents/{path}'
 
     try:
@@ -49,53 +53,44 @@ def get_repo_files(username, repo_name, path=''):
         # Recursively call get_repo_files on directories
         for r in res:
             if r['type'] == 'dir':
-                all_files.extend(get_repo_files(username, repo_name, r['path']))
+                repo_files.update(get_repo_files(username, repo_name, r['path']))
             else:
-                all_files.append(r)
+                filename = r['name']
+                file_ext = filename.split(".")[-1]
+
+                if file_ext in SCRAPABLE_EXTENSIONS:
+                    file_path = r['path']
+                    file_path = repo_name + '/' + file_path
+                    download_url = r['download_url']
+                    content = requests.get(download_url).text
+                    repo_files[file_path] = content
 
     except requests.HTTPError as e:
         sys.exit(e)
 
+    return repo_files
+
+def get_all_files_for_user(username):
+    all_files = {}
+    repo_names = get_user_repos(username)
+    for name in repo_names:
+        repo_files = get_repo_files(username, name)
+        all_files.update(repo_files)
     return all_files
-
-
-def find_match(username, repo, file, pattern):
-    # TODO: implement
-    return
 
 if __name__ == '__main__':
     username = 'kklose23'
 
-    repos = get_user_repos(username)
+    files = get_all_files_for_user(username)
+    print(files)
 
-    print(f'Num repos: {len(repos)}')
+    '''
+    repo_names = get_user_repos(username)
+    print(repo_names)
 
-    repos.sort(key=lambda x: x['stargazers_count'], reverse=True)
-
-    # Used so script ignores binary files
-    # We could do another way later if we don't want to list out all extensions we want
-    scrapable_extensions = {'cpp', 'txt', 'py'}
-
-    print('Top 5 most starred repos:')
-
-    for repo in repos[0:5]:
-        count = repo['stargazers_count']
-        name = repo['name']
-        print(f'{count}: {name}')
+    for name in repo_names:
         contents = get_repo_files(username, name)
-        for c in contents:
-            filename = c['name']
-            html_url = c['html_url']
-            download_url = c['download_url']
-            
-            print(f'\tFile Name: {filename}')
-            print(f'\tDownload URL: {download_url}\n')
+        print(contents)
+    '''
 
-            file_ext = filename.split(".")[-1]
-
-            if file_ext in scrapable_extensions:
-                r = requests.get(download_url)
-                print(r.text)
-            else:
-                print('Binary file')
 
