@@ -5,7 +5,7 @@ BASE_URL = 'https://api.github.com'
 
 # Used so script ignores binary files
 # We could do another way later if we don't want to list out all extensions we want
-SCRAPABLE_EXTENSIONS = {'cpp', 'txt', 'py', 'config', 'c'}
+SCRAPABLE_EXTENSIONS = {'cpp', 'txt', 'py', 'config', 'c', 'js', 'html'}
 
 def get_user_repos(username):
     """Gets list of public repositories owned by a particular user
@@ -43,30 +43,41 @@ def get_repo_files(username, repo_name, path=''):
         [:returns] a list of all the files from a given user's repository
     """
 
-    repo_files = {}
-    url = f'{BASE_URL}/repos/{username}/{repo_name}/contents/{path}'
+    
+    # Get the sha value for my call to recursively get the repo tree
+    url = f'{BASE_URL}/repos/{username}/{repo_name}/branches/master'
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.HTTPError as e:
+        sys.exit(e)
+
+
+    r = response.json()
+    sha = r['commit']['sha']
+
+    # Get the entire tree to get file paths and in turn create the download urls
+    url = f'{BASE_URL}/repos/{username}/{repo_name}/git/trees/{sha}?recursive=1'
 
     try:
         response = requests.get(url)
         res = response.json()
-
-        # Recursively call get_repo_files on directories
-        for r in res:
-            if r['type'] == 'dir':
-                repo_files.update(get_repo_files(username, repo_name, r['path']))
-            else:
-                filename = r['name']
-                file_ext = filename.split(".")[-1]
-
-                if file_ext in SCRAPABLE_EXTENSIONS:
-                    file_path = r['path']
-                    file_path = repo_name + '/' + file_path
-                    download_url = r['download_url']
-                    content = requests.get(download_url).text
-                    repo_files[file_path] = content
-
     except requests.HTTPError as e:
         sys.exit(e)
+
+    repo_files = {}
+    tree = res['tree']
+    for t in tree:
+        if t['type'] == 'blob':
+            file_path = t['path']
+            file_ext = file_path.split(".")[-1]
+            if file_ext in SCRAPABLE_EXTENSIONS:
+                download_url = f'https://raw.githubusercontent.com/{username}/{repo_name}/master/{file_path}'
+                content = requests.get(download_url).text
+                file_key = repo_name + '/' + file_path
+                print(file_key)
+                repo_files[file_key] = content
 
     return repo_files
 
@@ -79,10 +90,9 @@ def get_all_files_for_user(username):
     return all_files
 
 if __name__ == '__main__':
-    username = 'kklose23'
+    username = 'ss5nathan'
 
     files = get_all_files_for_user(username)
-    print(files)
 
     '''
     repo_names = get_user_repos(username)
