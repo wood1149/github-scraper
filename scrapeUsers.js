@@ -16,7 +16,7 @@ const fs = require("fs");
 //0, scrape from user
 //1, scrape user followers
 const operation = 0;
-let usernameToScrape = "orta"
+let usernameToScrape = "orta" //yegor256
 const originalUser = usernameToScrape
 let numUsersToScrape = 1000
 
@@ -25,7 +25,7 @@ let bigSet2 = new Set();
 let nxurl = usernameToScrape+"/followers";
 let userCounter = 0;
 let unamesToScrape = [];
-
+let seenUnamesThisRun = new Set()
 
 
 
@@ -66,12 +66,17 @@ const getOnePage = url => {
 
 const hasUserBeenScraped = username =>{
     let res = false
-     fs.readdirSync("./usernames/").forEach(file => {
-      if(file.includes(username)){
-            console.log('Data for ' + username + " already exists")
-            res = file;
-        }
-    });
+    if(!seenUnamesThisRun.has(username))
+    {
+        fs.readdirSync("./usernames/").forEach(file => {
+         if(file.includes(username)){
+                console.log('Data for ' + username + " already exists")
+                res = file;
+            }
+        });
+    }
+   
+     
     return res;
 }
 
@@ -105,13 +110,18 @@ const intervalGet = () => {
     if(hasUserBeenScraped(usernameToScrape) !== false && (operation == 0 || operation === 1 && unamesToScrape.length <= unameIndex) ){
         throw "Data already exists"
     }else{
+        seenUnamesThisRun.add(usernameToScrape)
         console.log("Starting to scrape " + usernameToScrape + " " + nxurl)
         let inter = setInterval(() => {
 
             if (hasUserBeenScraped(usernameToScrape) !== false || userCounter > numUsersToScrape  || nxurl === undefined ) {
+                seenUnamesThisRun.add(usernameToScrape)
+
                 console.log("cleared interval " + usernameToScrape);
+                console.log(seenUnamesThisRun)
                 clInterval= true;
                 userCounter = 0;
+
                 if( operation === 1 && unameIndex < unamesToScrape.length ){
                     unameIndex++;
                     usernameToScrape = unamesToScrape[unameIndex];

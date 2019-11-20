@@ -50,9 +50,8 @@ def match_api_key(line):
         output = re.findall(exp,line)  
     if(len(output) > 0):
         print("Api key found")
-        print(output)
         return True
     return False
 
 if __name__ == '__main__':
-    
+    pass
