@@ -14,6 +14,21 @@ def match_email(line):
         return True
     return False
 
+# matches Bitcoin address, URI, extended public key
+def match_bitcoin(line): 
+    bitcoinAddress = re.compile(r'[13][a-km-zA-HJ-NP-Z1-9]{25,34}')
+    bitcoinURI = re.compile(r'bitcoin:([13][a-km-zA-HJ-NP-Z1-9]{25,34})')
+    bitcoinExtendedPublicKey = re.compile(r'(xpub[a-km-zA-HJ-NP-Z1-9]{100,108})(\\?c=\\d*&h=bip\\d{2,3})?')
+
+    regexes = [bitcoinAddress, bitcoinURI, bitcoinExtendedPublicKey]
+    
+    for regex in regexes:
+        output = re.findall(regex,line)  
+    if(len(output) > 0):
+        print("Bitcoin info found")
+        return True
+    return False
+    
 #matches API keys
 def match_api_key(line):
     #https://gist.github.com/hsuh/88360eeadb0e8f7136c37fd46a62ee10
