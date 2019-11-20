@@ -23,7 +23,6 @@ def findMatches(key,fileString,outputMap):
     print("finding matches")
     idx = 1
     for line in getLine(fileString):
-        print("line:" + line)
         if(MatchAPI(line)):
             outputMap[key] = ["API:" + str(idx)]
         idx +=1
