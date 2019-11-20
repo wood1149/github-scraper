@@ -6,7 +6,7 @@ import re
 # matches emails
 def match_email(line):
     #https://emailregex.com/
-    email = re.compile(r'(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)')
+    email = re.compile(r'([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)')
     output = re.findall(email,line)  
     if(len(output) > 0):
         print("Email found")
@@ -28,7 +28,31 @@ def match_bitcoin(line):
         print("Bitcoin info found")
         return True
     return False
-    
+
+# matches cryptokeys
+def match_crypto(line):
+    # keys in hex
+    # 56-64 bit keys (DES)
+    hex64bit = re.compile(r'[a-fA-F0-9]{14,16}')
+    # 128, 192, 256 bit keys with extra parity bits (AES)
+    hex128Bit = re.compile(r'[a-fA-F0-9]{32,36}') 
+    hex192Bit = re.compile(r'[a-fA-F0-9]{48,54}')
+    hex256Bit = re.compile(r'[a-fA-F0-9]{64,72}')
+    # 2048 bit key (RSA)
+    hex2048Bit = re.compile(r'[a-fA-F0-9]{512}')
+
+    #keys in base64, minumum 128 bit
+    base64 = re.compile(r'(?:[A-Za-z0-9+/]{4}){10,}(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})(?:=[A-Za-z0-9+/]{4})?$')
+
+    regexes = [hex64bit, hex128Bit, hex192Bit, hex256Bit, hex2048Bit, base64]
+
+    for regex in regexes:
+        output = re.findall(regex,line)  
+    if(len(output) > 0):
+        print("Crypto key info found")
+        return True
+    return False
+
 #matches API keys
 def match_api_key(line):
     #https://gist.github.com/hsuh/88360eeadb0e8f7136c37fd46a62ee10
