@@ -41,8 +41,8 @@ def match_crypto(line):
     # 2048 bit key (RSA)
     hex2048Bit = re.compile(r'[a-fA-F0-9]{512}')
 
-    #keys in base64, minumum 128 bit
-    base64 = re.compile(r'(?:[A-Za-z0-9+/]{4}){10,}(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})(?:=[A-Za-z0-9+/]{4})?$')
+    #keys in base64
+    base64 = re.compile(r'^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})(?:=[A-Za-z0-9+/]{4})?$')
 
     regexes = [hex64bit, hex128Bit, hex192Bit, hex256Bit, hex2048Bit, base64]
 
