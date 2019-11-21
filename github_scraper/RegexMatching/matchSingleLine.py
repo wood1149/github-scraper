@@ -53,6 +53,22 @@ def match_crypto(line):
         return True
     return False
 
+# matches passwords
+def match_password(line):
+    # password with at least 8 characters, one uppercase, one lowercase, one number and one special character
+    pw1 = re.compile(r'(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#?!@$%^&*-])[A-Za-z\d#?!@$%^&*-]{8,}')
+    # password with variable name 'password', 'pw', or 'p'
+    pw2 = re.compile(r'(?:password|pw|p)(?: ?= ?)[A-Za-z\d#?!@$%^&*-]+')
+
+    regexes = [pw1, pw2]
+
+    for regex in regexes:
+        output = re.findall(regex,line)  
+    if(len(output) > 0):
+        print("Password found")
+        return True
+    return False
+
 #matches API keys
 def match_api_key(line):
     #https://gist.github.com/hsuh/88360eeadb0e8f7136c37fd46a62ee10
