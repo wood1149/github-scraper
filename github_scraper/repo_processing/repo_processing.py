@@ -38,12 +38,13 @@ def get_repo_files(username, repo_name, path=''):
         [:param `repo_name`] the String representation of the name of a repository
         [:param `path`] the String representation of the path of a directory within a repository. Used in recursive calls.
         
-        [:rtype] `list` of dictionaries
+        [:rtype] `dictionary`
         
-        [:returns] a list of all the files from a given user's repository
+        [:returns] a dictionary of all the file paths and content from a given user's repository
     """
 
-    
+
+    '''    
     # Get the sha value for my call to recursively get the repo tree
     url = f'{BASE_URL}/repos/{username}/{repo_name}/branches/master'
 
@@ -56,9 +57,10 @@ def get_repo_files(username, repo_name, path=''):
 
     r = response.json()
     sha = r['commit']['sha']
+    '''
 
     # Get the entire tree to get file paths and in turn create the download urls
-    url = f'{BASE_URL}/repos/{username}/{repo_name}/git/trees/{sha}?recursive=1'
+    url = f'{BASE_URL}/repos/{username}/{repo_name}/git/trees/master?recursive=1'
 
     try:
         response = requests.get(url)
@@ -76,7 +78,6 @@ def get_repo_files(username, repo_name, path=''):
                 download_url = f'https://raw.githubusercontent.com/{username}/{repo_name}/master/{file_path}'
                 content = requests.get(download_url).text
                 file_key = repo_name + '/' + file_path
-                print(file_key)
                 repo_files[file_key] = content
 
     return repo_files
