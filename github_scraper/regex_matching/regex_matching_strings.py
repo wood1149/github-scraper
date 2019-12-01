@@ -12,13 +12,14 @@ def match_email(line):
         return True
     return False
 
-# matches Bitcoin address, URI, extended public key
+# matches Bitcoin private key, URI, extended public key
 def match_bitcoin(line): 
     bitcoinAddress = re.compile(r'[13][a-km-zA-HJ-NP-Z1-9]{25,34}')
     bitcoinURI = re.compile(r'bitcoin:([13][a-km-zA-HJ-NP-Z1-9]{25,34})')
     bitcoinExtendedPublicKey = re.compile(r'(xpub[a-km-zA-HJ-NP-Z1-9]{100,108})(\\?c=\\d*&h=bip\\d{2,3})?')
+    bitcoinPrivateKey = re.compile(r'[5KL][1-9A-HJ-NP-Za-km-z]{50,51}')
 
-    regexes = [bitcoinAddress, bitcoinURI, bitcoinExtendedPublicKey]
+    regexes = [bitcoinAddress,bitcoinPrivateKey, bitcoinURI, bitcoinExtendedPublicKey]
     
     for regex in regexes:
         output = re.findall(regex,line)  
@@ -56,7 +57,7 @@ def match_password(line):
     # password with at least 8 characters, one uppercase, one lowercase, one number and one special character
     pw1 = re.compile(r'(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#?!@$%^&*-])[A-Za-z\d#?!@$%^&*-]{8,}')
     # password with variable name 'password', 'pw', or 'p'
-    pw2 = re.compile(r'(?:password|pw|p)(?: ?= ?)[A-Za-z\d#?!@$%^&*-]+')
+    pw2 = re.compile(r'(?:password|pw|p)(?: ?= ?)"?[A-Za-z\d#?!@$%^&*-]+"?')
 
     regexes = [pw1, pw2]
 
@@ -70,38 +71,34 @@ def match_password(line):
 #matches API keys
 def match_api_key(line):
     #https://gist.github.com/hsuh/88360eeadb0e8f7136c37fd46a62ee10
-    AWSaccessKeyID = re.compile(r'(?<![A-Z0-9])[A-Z0-9]{20}(?![A-Z0-9])')
+    #AWSaccessKeyID = re.compile(r'(?<![A-Z0-9])[A-Z0-9]{20}(?![A-Z0-9])')
     AWSsecretAccessKey = re.compile(r'(?<![A-Za-z0-9/+=])[A-Za-z0-9/+=]{40}(?![A-Za-z0-9/+=])')
     AWSsecretAccessKeyAlternative = re.compile(r'[0-9a-zA-Z/+]{40}')
     #https://people.eecs.berkeley.edu/~rohanpadhye/files/key_leaks-msr15.pdf
     #Bitly
-    BITaccessKeyID = re.compile(r'[0-9a-zA-Z_]{5,31}')
     BITsecretAccessKey = re.compile(r'R_[0-9a-f]{32}')
     #Facebook
-    FBaccessKeyID = re.compile(r'[0-9]{13,17}')
     FBsecretAccessKey = re.compile(r'[0-9a-f]{32}')
 
     #FLICKR
-    FLaccessKeyID = re.compile(r'[0-9a-f]{32}')
     FLsecretAccessKey = re.compile(r'[0-9a-f]{16}')
 
     #Foursquare
-    FSaccessKeyID = re.compile(r'[0-9A-Z]{48}')
     FSsecretAccessKey = re.compile(r'[0-9A-Z]{48}')
 
     #LinkedIn
-    LIaccessKeyID = re.compile(r'[0-9a-z]{12}')
     LIsecretAccessKey = re.compile(r'[0-9a-zA-Z]{16}')
 
     #Twitter
-    TWaccessKeyID = re.compile(r'[0-9a-zA-Z]{18,25}')
     TWsecretAccessKey = re.compile(r'[0-9a-zA-Z]{35,44}')
 
+    #only letter
+    onlyLetters = re.compile(r'^[a-zA-Z]+$')
     regexar = [AWSaccessKeyID,AWSsecretAccessKey,BITaccessKeyID,BITsecretAccessKey,FBaccessKeyID,FLsecretAccessKey,AWSsecretAccessKeyAlternative]
     
     for exp in regexar:
         output = re.findall(exp,line)  
-    if(len(output) > 0):
+    if(len(output) > 0 && onlyLetters.match(output[0]) == None):
         print("Api key found")
         return True
     return False
