@@ -1,8 +1,6 @@
 import re
 
 
-#---BEGIN RSA PRIVATE KEY--- 
-
 # matches emails
 def match_email(line):
     #https://emailregex.com/
