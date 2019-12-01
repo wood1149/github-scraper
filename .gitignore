@@ -107,3 +107,6 @@ env
 
 *.code-workspace
 __pycache__
+*.spec
+dist
+build

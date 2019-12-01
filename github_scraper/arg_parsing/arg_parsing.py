@@ -20,12 +20,11 @@ def setup_argparse():
     vuln_group.add_argument('-e', '--email', help='Look for email addresses', action='store_true')
     args = parser.parse_args()
     
+    print(f'Scraping repositories for user {args.username}')
     if args.repo:
         # Repo name provided
+        print(f'Scraping {args.repo} repository')
         repo_files = RepoProcessing.get_repo_files(args.username, args.repo)
         print("Recieved files from " +str(args.username) +"/"+ str(args.repo))
     else:
         repo_names = RepoProcessing.get_user_repos(args.username)
-        print("Recieved files from " + str(args.repo))
-
-    
