@@ -3,6 +3,9 @@ import requests
 
 BASE_URL = 'https://api.github.com'
 
+api_token = '3876589a061f3fd1739199b9577bec1a36994cac'
+HEADERS = {'Authorization': f'token {api_token}'}
+
 # Used so script ignores binary files
 # We could do another way later if we don't want to list out all extensions we want
 SCRAPABLE_EXTENSIONS = {'cpp', 'txt', 'py', 'config', 'c', 'js', 'html'}
@@ -20,7 +23,7 @@ def get_user_repos(username):
     url = f'{BASE_URL}/users/{username}/repos'
 
     try:
-        response = requests.get(url)
+        response = requests.get(url, headers=HEADERS)
         response.raise_for_status()
     except requests.HTTPError as e:
         sys.exit(e)
@@ -63,7 +66,7 @@ def get_repo_files(username, repo_name, path=''):
     url = f'{BASE_URL}/repos/{username}/{repo_name}/git/trees/master?recursive=1'
 
     try:
-        response = requests.get(url)
+        response = requests.get(url, headers=HEADERS)
         res = response.json()
     except requests.HTTPError as e:
         sys.exit(e)
@@ -76,7 +79,7 @@ def get_repo_files(username, repo_name, path=''):
             file_ext = file_path.split(".")[-1]
             if file_ext in SCRAPABLE_EXTENSIONS:
                 download_url = f'https://raw.githubusercontent.com/{username}/{repo_name}/master/{file_path}'
-                content = requests.get(download_url).text
+                content = requests.get(download_url, headers=HEADERS).text
                 file_key = repo_name + '/' + file_path
                 repo_files[file_key] = content
 
@@ -94,7 +97,8 @@ if __name__ == '__main__':
     username = 'ss5nathan'
 
     files = get_all_files_for_user(username)
-
+    #repos = get_user_repos(username)
+    print(files)
     '''
     repo_names = get_user_repos(username)
     print(repo_names)
