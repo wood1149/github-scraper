@@ -15,9 +15,11 @@ def setup_argparse():
 
     # Check for these vulnerabilities
     vuln_group = parser.add_argument_group('Vulnerability types')
-    vuln_group.add_argument('-a', '--api', help='Look for API keys', action='store_true')
+    vuln_group.add_argument('--api', help='Look for API keys', action='store_true')
     vuln_group.add_argument('-p', '--password', help='Look for passwords', action='store_true')
     vuln_group.add_argument('-e', '--email', help='Look for email addresses', action='store_true')
+    vuln_group.add_argument('-b', '--bitcoin', help='Look for bitcoin', action='store_true')
+    vuln_group.add_argument('-c', '--crypto', help='Look for cryptographic keys', action='store_true')
     args = parser.parse_args()
     
     print(f'Scraping repositories for user {args.username}')
@@ -28,3 +30,4 @@ def setup_argparse():
         print("Recieved files from " +str(args.username) +"/"+ str(args.repo))
     else:
         repo_names = RepoProcessing.get_user_repos(args.username)
+        print(repo_names)
