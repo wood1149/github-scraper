@@ -31,7 +31,7 @@ def getAlreadyScrapedUsers():
     usernames = set()
 
     #walk through username directory
-    for file in glob.glob("./githubIOSites/*.html"):
+    for file in glob.glob("./github_site_data/*.html"):
         #if("invalid" not in file.lower()):
         usernames.add(file.split("_")[0])
         #print("Foudn " + str(file.split("_")[0]))
@@ -98,10 +98,10 @@ if __name__ == '__main__':
                 exit(1)
         elif(res!= False):
             #writes html to file
-            with open("./githubIOSites/"+user+"_GithubSiteHTML.html","w+") as outfile:
+            with open("./github_site_data/"+user+"_GithubSiteHTML.html","w+") as outfile:
                 outfile.write(res)
         else:
-            with open("./githubIOSites/"+user+"_INVALID.html","w+") as outfile:
+            with open("./github_site_data/"+user+"_INVALID.html","w+") as outfile:
                 outfile.write("no data")
 
 

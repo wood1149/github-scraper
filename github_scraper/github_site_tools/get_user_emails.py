@@ -6,13 +6,13 @@ import re
 import os
 
 
-def get_user_emails(site_dir='githubIOSites'):
+def get_user_emails(site_dir='github_site_data'):
     """ Obtains a list of user emails and then dumps them
         into a JSON file.
 
         Args:
             site_dir: The directory containing site information,
-                default githubIOSites
+                default github_site_data
     """
     c_dir = os.getcwd()
     html_dir = os.path.join(c_dir, site_dir)

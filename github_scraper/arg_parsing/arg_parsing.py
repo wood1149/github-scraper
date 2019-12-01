@@ -1,7 +1,6 @@
 ''' arg_parsing module. '''
 import argparse
 
-from sample_module import test, test2
 from repo_processing import repo_processing as RepoProcessing
 
 # Hardcoded strings, maybe replace with configuration file
@@ -24,6 +23,9 @@ def setup_argparse():
     if args.repo:
         # Repo name provided
         repo_files = RepoProcessing.get_repo_files(args.username, args.repo)
+        print("Recieved files from " +str(args.username) +"/"+ str(args.repo))
     else:
         repo_names = RepoProcessing.get_user_repos(args.username)
+        print("Recieved files from " + str(args.repo))
+
     
