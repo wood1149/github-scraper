@@ -19,8 +19,9 @@ def match_bitcoin(line):
 
     regexes = [bitcoinAddress,bitcoinPrivateKey, bitcoinURI, bitcoinExtendedPublicKey]
     
+    output = []
     for regex in regexes:
-        output = re.findall(regex,line)  
+        output.extend(re.findall(regex,line))
     if(len(output) > 0):
         return True
     return False
@@ -42,8 +43,9 @@ def match_crypto(line):
 
     regexes = [hex64bit, hex128Bit, hex192Bit, hex256Bit, hex2048Bit, base64]
 
+    output = []
     for regex in regexes:
-        output = re.findall(regex,line)  
+        output.extend(re.findall(regex,line))
     if(len(output) > 0):
         return True
     return False
@@ -57,8 +59,9 @@ def match_password(line):
 
     regexes = [pw1, pw2]
 
+    output = []
     for regex in regexes:
-        output = re.findall(regex,line)  
+        output.extend(re.findall(regex,line))
     if(len(output) > 0):
         return True
     return False
@@ -91,8 +94,9 @@ def match_api_key(line):
     onlyLetters = re.compile(r'^[a-zA-Z]+$')
     regexar = [AWSsecretAccessKey,BITsecretAccessKey,FLsecretAccessKey,AWSsecretAccessKeyAlternative,TWsecretAccessKey,LIsecretAccessKey,FSsecretAccessKey]
     
-    for exp in regexar:
-        output = re.findall(exp,line)  
+    output = []
+    for regex in regexar:
+        output.extend(re.findall(regex,line))
     if(len(output) > 0 and onlyLetters.search(output[0]) == None):
         return True
     return False

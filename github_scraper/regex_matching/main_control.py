@@ -25,7 +25,7 @@ def getLine(filestr=gfilestr):
 
 def findMatches(key,fileString,outputMap):
     idx = 1
-    for line in getLine(fileString):
+    for line in fileString.splitlines():
       if(MatchAPI(line)):
         if(len(outputMap[key]) == 0):
           outputMap[key] = ["API:" + str(idx)]
