@@ -98,7 +98,7 @@ def match_api_key(line):
     
     for exp in regexar:
         output = re.findall(exp,line)  
-    if(len(output) > 0 && onlyLetters.match(output[0]) == None):
+    if(len(output) > 0 && onlyLetters.search(output[0]) == None):
         print("Api key found")
         return True
     return False
