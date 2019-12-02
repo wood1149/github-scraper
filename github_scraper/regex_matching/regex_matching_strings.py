@@ -55,7 +55,7 @@ def match_password(line):
     # password with at least 8 characters, one uppercase, one lowercase, one number and one special character
     #pw1 = re.compile(r'(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#?!@$%^&*-])[A-Za-z\d#?!@$%^&*-]{8,}')
     # password with variable name 'password', 'pw', or 'p'
-    pw2 = re.compile(r'(?:password|pw| p)(?: ?= ?)"?[A-Za-z\d#?!@$%^&*-]+"?')
+    pw2 = re.compile(r'(?:password|pw|p)(?: ?= ?)["|\']?[A-Za-z\d#?!@$%^&*-]+["|\']?')
 
     regexes = [pw2]
 
