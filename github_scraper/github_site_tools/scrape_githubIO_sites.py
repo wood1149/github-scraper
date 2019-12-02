@@ -62,7 +62,7 @@ def requestIOSite(username):
     if(response.status_code == 200):
         #valid site
         print("\t(res): VALID")
-        return response.content
+        return response.text
         
     else:
         print("\t(res): " + str(response.status_code))
@@ -106,7 +106,7 @@ if __name__ == '__main__':
         elif(res!= False):
             #writes html to file
             with open(datapath+"/github_site_data/"+user+"_GithubSiteHTML.html","w+") as outfile:
-                outfile.write(str(res))
+                outfile.write(res)
         else:
             with open(datapath+"/github_site_data/"+user+"_INVALID.html","w+") as outfile:
                 outfile.write("no data")

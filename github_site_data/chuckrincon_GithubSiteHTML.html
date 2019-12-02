@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>hello mundo</title>
+	<link rel="stylesheet" href="">
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+	<ul id="app"></ul>
+</body>
+<script type="text/javascript">
+	axios.get('https://api.phara.shop/v1/products', {
+		headers: {
+			'Accept-Language': 'es',
+		}
+	})
+	.then(function (response) {
+		let data = response.data.data;
+
+		let products = [];
+
+		data.forEach(product => {
+			if (product.products[0]) {
+				products.push(`<li>${product.products[0].translations[0].name} — <small>(${product.products[0].translations[0].formatted_price})</small></li>`)
+			}
+		});
+
+		document.getElementById('app').innerHTML = products.join('');
+
+		console.log(response);
+	}).catch(function (error) {
+		console.log(error);
+
+		document.getElementById('app').innerHTML = error;
+	}).finally(function () {
+	});
+</script>
+</html>
