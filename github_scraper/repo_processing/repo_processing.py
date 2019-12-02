@@ -9,6 +9,7 @@ HEADERS = {'Authorization': f'token {api_token}'}
 # Used so script ignores binary files
 # We could do another way later if we don't want to list out all extensions we want
 SCRAPABLE_EXTENSIONS = {'cpp', 'txt', 'py', 'config', 'c', 'js', 'html'}
+DIRECTORIES_TO_AVOID = {'node_modules', 'env', 'github_site_data', 'username_data'}
 
 def get_user_repos(username):
     """Gets list of public repositories owned by a particular user
@@ -66,7 +67,9 @@ def get_repo_files(username, repo_name, path=''):
     url = f'{BASE_URL}/repos/{username}/{repo_name}/git/trees/master?recursive=1'
 
     try:
-        response = requests.get(url, headers=HEADERS)
+        # response = requests.get(url, headers=HEADERS)
+        response = requests.get(url)
+
         res = response.json()
     except requests.HTTPError as e:
         sys.exit(e)
@@ -77,7 +80,7 @@ def get_repo_files(username, repo_name, path=''):
         if t['type'] == 'blob':
             file_path = t['path']
             file_ext = file_path.split(".")[-1]
-            if file_ext in SCRAPABLE_EXTENSIONS:
+            if file_ext in SCRAPABLE_EXTENSIONS and not any(dir in file_path for dir in DIRECTORIES_TO_AVOID):
                 download_url = f'https://raw.githubusercontent.com/{username}/{repo_name}/master/{file_path}'
                 content = requests.get(download_url, headers=HEADERS).text
                 file_key = repo_name + '/' + file_path
