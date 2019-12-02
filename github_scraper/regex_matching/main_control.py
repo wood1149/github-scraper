@@ -26,8 +26,6 @@ def getLine(filestr=gfilestr):
 def findMatches(key,fileString,outputMap):
     idx = 1
     for line in getLine(fileString):
-      print(line)
-      print("\tlooking for vulns above ")
 
       if(MatchAPI(line)):
         if(len(outputMap[key]) == 0):
