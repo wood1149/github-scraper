@@ -1,8 +1,8 @@
-from regex_matching_strings import match_api_key as MatchAPI
-from regex_matching_strings import match_password as MatchPW
-from regex_matching_strings import match_crypto as MatchCrypto
-from regex_matching_strings import match_bitcoin as MatchBitcion 
-from regex_matching_strings import match_email as MatchEmail
+from .regex_matching_strings import match_api_key as MatchAPI
+from .regex_matching_strings import match_password as MatchPW
+from .regex_matching_strings import match_crypto as MatchCrypto
+from .regex_matching_strings import match_bitcoin as MatchBitcion 
+from .regex_matching_strings import match_email as MatchEmail
 
 gfilestr = ""
 #takes in a map, runs regex matching on text, and returns type/line number of match
