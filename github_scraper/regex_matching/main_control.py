@@ -24,7 +24,6 @@ def getLine(filestr=gfilestr):
       prevnl = nextnl
 
 def findMatches(key,fileString,outputMap):
-    print("finding matches")
     idx = 1
     for line in getLine(fileString):
       if(MatchAPI(line)):

@@ -94,11 +94,11 @@ def match_api_key(line):
 
     #only letter
     onlyLetters = re.compile(r'^[a-zA-Z]+$')
-    regexar = [AWSaccessKeyID,AWSsecretAccessKey,BITaccessKeyID,BITsecretAccessKey,FBaccessKeyID,FLsecretAccessKey,AWSsecretAccessKeyAlternative]
+    regexar = [AWSsecretAccessKey,BITsecretAccessKey,FLsecretAccessKey,AWSsecretAccessKeyAlternative,TWsecretAccessKey,LIsecretAccessKey,FSsecretAccessKey]
     
     for exp in regexar:
         output = re.findall(exp,line)  
-    if(len(output) > 0 && onlyLetters.search(output[0]) == None):
+    if(len(output) > 0 and onlyLetters.search(output[0]) == None):
         print("Api key found")
         return True
     return False
