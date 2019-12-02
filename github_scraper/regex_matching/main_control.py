@@ -27,15 +27,32 @@ def findMatches(key,fileString,outputMap):
     idx = 1
     for line in getLine(fileString):
       if(MatchAPI(line)):
-        outputMap[key] = ["API:" + str(idx)]
+        if(len(outputMap[key]) == 0):
+          outputMap[key] = ["API:" + str(idx)]
+        else:
+          outputMap[key].append("API:" + str(idx))
+
       if(MatchPW(line)):
-        outputMap[key] = ["Password:" + str(idx)]
+        if(len(outputMap[key]) == 0):
+          outputMap[key] = ["Password:" + str(idx)]
+        else:
+          outputMap[key].append("Password:" + str(idx))
+
       if(MatchCrypto(line)):
-        outputMap[key] = ["Crypto:" + str(idx)]
+        if(len(outputMap[key]) == 0):
+          outputMap[key] = ["Crypto:" + str(idx)]
+        else:
+          outputMap[key].append("Crypto:" + str(idx))
       if(MatchBitcion(line)):
-        outputMap[key] = ["Bitcoin:" + str(idx)]
+        if(len(outputMap[key]) == 0):
+          outputMap[key] = ["Bitcoin:" + str(idx)]
+        else:
+          outputMap[key].append("Bitcoin:" + str(idx))
       if(MatchEmail(line)):
-        outputMap[key] = ["Email:" + str(idx)]
+        if(len(outputMap[key]) == 0):
+          outputMap[key] = ["Email:" + str(idx)]
+        else:
+          outputMap[key].append("Email:" + str(idx))
 
       idx +=1
             

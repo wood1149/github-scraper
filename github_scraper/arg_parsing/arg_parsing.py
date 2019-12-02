@@ -24,7 +24,6 @@ def setup_argparse():
     vuln_group.add_argument('-c', '--crypto', help='Look for cryptographic keys', action='store_true')
     args = parser.parse_args()
     
-    print(f'Scraping repositories for user {args.username}')
     if args.repo:
         # Repo name provided
         print(f'Scraping {args.repo} repository')
@@ -33,5 +32,6 @@ def setup_argparse():
         v = find_vulnerabilities(repo_files)
         display_results(v)
     else:
+        print(f'Scraping repositories for user {args.username}')
         repo_names = RepoProcessing.get_user_repos(args.username)
         print(repo_names)

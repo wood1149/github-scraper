@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <!-- icons / theme color -->
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="assets/img/favicon_package_v0.16/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="assets/img/favicon_package_v0.16/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="assets/img/favicon_package_v0.16/favicon-16x16.png"
+        />
+        <link
+            rel="manifest"
+            href="assets/img/favicon_package_v0.16//site.webmanifest"
+        />
+        <link
+            rel="mask-icon"
+            href="assets/img/favicon_package_v0.16//safari-pinned-tab.svg"
+            color="#5bbad5"
+        />
+        <meta name="msapplication-TileColor" content="#9f00a7" />
+        <meta name="theme-color" content="#ffffff" />
+
+        <!-- links start -->
+        <div w3-include-html="partials/headLinks.html"></div>
+        <!-- links end -->
+        <title>Mr.abayoss</title>
+    </head>
+    <body>
+        <!-- layout/navbar start -->
+        <div w3-include-html="layout/nav.html"></div>
+        <!-- layout/navbar end -->
+
+        <!-- pages/main start -->
+        <main>
+            <!-- first section : introduction  -->
+            <section
+                class="bg-black-img halfSection pt-5 animated reveal"
+                id="intro"
+            >
+                <div class="container py-5">
+                    <div class="VH pt-5">
+                        <div class="row pt-5">
+                            <div class="col-md-8">
+                                <h2>Oussama abaayous</h2>
+                                <h6 class="mt-3">
+                                    A Moroccan Web Developer, based in Rabat.
+                                </h6>
+                                <h6>
+                                    He dedicates his time to develop products
+                                    and create useful services, mostly built
+                                    with Angular and Express.
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- begin Scroll Down Button -->
+                    <!-- <button
+                type="button"
+                class="animated scroll_down slideUp"
+                onclick="scrollButton()"
+                id="scroll_down"
+            ></button> -->
+                    <!-- end Scroll Down Button -->
+                </div>
+            </section>
+
+            <!-- Work Section  -->
+            <section class="bg-grey slideLeft1 py-5 animated" id="work">
+                <div class="container">
+                    <h3 class="text-black animated slideUp">Work</h3>
+                    <!-- dynamic Work Section  -->
+                    <div
+                        class="row top_work_grid mb-5 animated slideRight2"
+                    ></div>
+                    <!-- <button
+                type="button"
+                onclick="location.href = 'work.html';"
+                class="more_work animated slideUp uk-button btn-warning"
+            >
+                more...
+            </button> -->
+                </div>
+            </section>
+
+            <!-- skill Section  -->
+            <section
+                class="animated slideRight1 bg-white halfSection py-5"
+                id="skill"
+            >
+                <div class="container">
+                    <div class="row animated slideLeft2">
+                        <div class="col-md-8">
+                            <h3 class="text-black">Working with</h3>
+                            <ul class="uk-list uk-list-divider">
+                                <li></li>
+                                <li>Angular 2 ++</li>
+                                <li>Node & Express JS</li>
+                                <li>Symfony</li>
+                                <li></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4 border-left2">
+                            <h3 class="text-black">Familiar with</h3>
+                            <ul class="uk-list uk-list-divider">
+                                <li></li>
+                                <li>RXJS</li>
+                                <li>laravel</li>
+                                <li>Asp .net</li>
+                                <li></li>
+                            </ul>
+                        </div>
+                        <!-- <button type="button" class="more_skills animated slideUp uk-button">
+                      more...
+                    </button> -->
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- pages/main end -->
+
+        <!-- layout/footer start  -->
+        <div w3-include-html="layout/footer.html"></div>
+        <!-- layout/footer start  -->
+
+        <script src="assets/js/w3htmlInclude.js"></script>
+        <script>
+            includeHTML();
+        </script>
+
+        <script src="assets/js/loadProjects.js"></script>
+        <script src="assets/js/AnimationOnScroll.js"></script>
+        <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+        <!-- <script src="assets/js/ScrollButton.js"></script> -->
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
+        <script src="assets/js/main.js"></script>
+    </body>
+</html>

@@ -1,0 +1,300 @@
+<html>
+
+<head>
+
+  <!-- BASICS -->
+  <meta charset="UTF-8">
+  <title>@menosprezzi</title>
+
+  <!-- SEARCH ABILITY -->
+  <meta name="google-site-verification" content="NLuVEz8obQ8Jszoz3-BIeOlC6cX6J_IHJTnZ8P0qGlI" />
+  <link rel="shortcut icon" type="image/png" href="res/images/favicon.png" />
+  <meta name="subject" content="Web Developer">
+  <meta name="description" content="Conheça o meu Trabalho." />
+  <meta name="keywords" content="Web Developer, Desenvolvedor, Freelance, Front, Frontend, Node, Desenvolvedor, Mobile, Angular" />
+  <meta name="language" content="PT">
+  <meta name="robots" content="index,follow" />
+
+  <!-- LINK SHARING -->
+  <meta name="og:title" content="Guilherme Prezzi" />
+  <meta name="og:image" content="res/images/sharing/index.png" />
+  <meta name="og:description" content="Conheça o meu Trabalho." />
+
+  <!-- USABILITY -->
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <link rel="icon" type="image/x-icon" href="waiting">
+  <meta name="theme-color" content="#000">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#000">
+
+  <!-- RESOURCES -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+<div class="header full-height paralax wallpaper">
+  <div class="header-inner">
+    <nav class="row center-xs">
+      <div class="col-xs-10 row">
+        <div class="row middle-xs">
+          <img class="rounded brand-logo hover-scalable" width="45" height="45" src="res/img/me.jpg">
+          <div class="brand">Guilherme Prezzi</div>
+        </div>
+        <div class="col-xs row end-xs middle-xs show-sm">
+          <a class="button flat black scroll-to" href="#about">Sobre</a>
+          <a class="button flat black scroll-to" href="#portfolio">Portfólio</a>
+          <a class="button black hover-scalable" href="https://github.com/menosprezzi" target="_blank"><i
+            class="icon ion-social-github"></i> Github</a>
+        </div>
+        <div class="col-xs row end-xs middle-xs show-only-xs">
+          <a class="icon-button flat black" id="menu_trigger"><i class="icon ion-navicon"></i></a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="fog"></div>
+    <div id="menu_content" style="display: none">
+      <div class="col-xs">
+        <a class="button glass hover-shadow scroll-to" href="#about">Sobre</a>
+        <a class="button glass hover-shadow scroll-to" href="#portfolio">Portfólio</a>
+        <a class="button glass hover-shadow" href="https://github.com/menosprezzi"><i
+          class="icon ion-social-github"></i> Github</a>
+      </div>
+    </div>
+    <div id="header_content">
+      <div class="header-title">
+        <h1>WEB DEVELOPER</h1>
+        <h2>Mobile, UX, FullStack JavaScript</h2>
+      </div>
+      <div class="header-bottom">
+        <a class="button outline black" id="button_descubra">Descubra o meu Trabalho</a>
+        <a class="icon-button flat black animated infinite fadeInDown scroll-to" href="#about"
+           id="icon_button_descubra"><i class="icon ion-android-arrow-dropdown-circle"></i></a>
+      </div>
+    </div>
+    <small class="header-watermark">Foto: André Pilli</small>
+  </div>
+  <div class="black-clip-path-overlay">
+    <div class="overlay-inner">
+      <div class="row center-xs">
+        <div class="col-xs-10 row">
+          <div class="row middle-xs">
+            <img class="rounded brand-logo hover-scalable" width="45" height="45" src="res/img/me.jpg">
+            <div class="brand">Guilherme Prezzi</div>
+          </div>
+        </div>
+      </div>
+      <div class="header-title">
+        <h1>WEB DEVELOPER</h1>
+        <h2>Mobile, UX, FullStack JavaScript</h2>
+      </div>
+      <div class="header-bottom">
+        <a class="button outline white">Descubra o meu Trabalho</a>
+        <a class="icon-button flat white animated infinite fadeInDown scroll-to" href="#about"><i
+          class="icon ion-android-arrow-dropdown-circle"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="paper">
+  <canvas id="lego-anm" class="background-canvas"></canvas>
+  <section class="full-height" id="about">
+    <div class="row no-gutter">
+      <div class="col-md-6 col-xs-12">
+        <h1>Sobre</h1>
+        <!-- @TODO: Find out how to fix that inline style -->
+        <div class="row middle-xs center-xs" style="height: calc(100% - 138px)">
+          <div class="card card-contact" id="me_card">
+            <img class="rounded card-avatar" src="res/img/me2.jpg" style="max-width: 50%">
+            <div class="card-content">
+              <h2>Guilherme Prezzi</h2>
+              <h3>Estudante Bach. Ciência da Computação - Unisinos</h3>
+            </div>
+            <div class="card-footer">
+              <img class="icon-sm" src="res/img/google_opensource.png"> Google's CLA Verified
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-6 flex-stretch">
+        <div class="terminal-wrapper pointer-left row middle-md">
+          <div id="terminal_about" class="terminal terminal-active compile"
+               data-archive="res/strings/about.txt">
+            {{strings.about}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="show-md z-index1">
+    <div class="mid-right-clip-path"></div>
+  </section>
+</div>
+
+<section class="full-height" id="portfolio">
+  <div class="row no-gutter">
+    <div class="col-md-6 show-md">
+      <div class="terminal-wrapper pointer-right">
+        <div class="container-padding">
+          <h1 class="compile" id="portfolio_title">{{actualPortfolio.title}}</h1>
+          <h2 class="compile" id="portfolio_subtitle">{{actualPortfolio.subtitle}}</h2>
+        </div>
+        <div class="row middle-md">
+          <div class="terminal">
+            <p class="compile" id="portfolio_description">{{actualPortfolio.description}}
+            <p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-xs-12 pos-clip-path lilac flex-stretch" id="portfolio_container">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="res/img/portfolio/clipit1.png">
+          </div>
+          <div class="swiper-slide">
+            <img src="res/img/portfolio/androino1.png">
+          </div>
+          <div class="swiper-slide">
+            <img src="res/img/portfolio/hercab1.png">
+          </div>
+          <div class="swiper-slide">
+            <img src="res/img/portfolio/breadsy1.jpg">
+          </div>
+          <div class="swiper-slide">
+            <img src="res/img/portfolio/flappy1.png">
+          </div>
+          <div class="swiper-slide">
+            <img src="res/img/portfolio/material.png">
+          </div>
+        </div>
+        <div class="swiper-button-next swiper-button-black"></div>
+        <div class="swiper-button-prev swiper-button-black"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="show-md z-index1">
+  <div class="mid-left-clip-path"></div>
+</section>
+
+<section class="full-height container-padding dark-gradient" id="tecnologias">
+  <h1>Tecnologias</h1>
+  <div class="row center-xs">
+      <div class="col-xs-12 col-sm-4 col-md-3 card mini-card text-center">
+        <img src="res/img/tecs/angular.svg" style="max-width: 50%">
+        <h2>Angular</h2>
+        <p class="text-justify">
+          Mantido pela Google, é um <em>Framework</em> MVVM para estruturar aplicações Web modularizadas e
+          concisas.
+        </p>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-3 card mini-card text-center">
+        <img src="res/img/tecs/ionic.png" style="max-width: 50%">
+        <h2>Ionic</h2>
+        <p class="text-justify">
+          Junto ao em Angular, Ionic oferece suporte visual e funcional para desenvolver aplicações híbridas
+          de qualidade.
+        </p>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-3 card mini-card text-center">
+        <img src="res/img/tecs/createjs.png" style="max-width: 50%">
+        <h2>Create JS</h2>
+        <p class="text-justify">
+          Biblioteca de animações em <em>canvas</em> com ênfase em performance. Utilizado frequentemente no
+          marketing digital e no desenvolvimento de games.
+        </p>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-3 card mini-card text-center">
+        <img src="res/img/tecs/construct.png" style="max-width: 50%">
+        <h2>Construct 2</h2>
+        <p class="text-justify">
+          <em>Engine</em> 2D para jogos HTML5, apresenta um desenvolvimento fluído possibilitando a criação de
+          jogos leves e de qualidade para <em>desktop</em>, <em>mobile</em>, Wii U e Xbox.
+        </p>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-3 card mini-card text-center">
+        <img src="res/img/tecs/mongo.png" style="max-width: 50%">
+        <h2>MongoDB</h2>
+        <p class="text-justify">
+          Banco de Dados orientado à documentos, possibilita a rápida manutenção, alta escalabilidade e buscas
+          performáticas.
+        </p>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-3 card mini-card text-center">
+        <img src="res/img/tecs/nodejs.png" style="max-width: 50%">
+        <h2>NodeJS</h2>
+        <p class="text-justify">
+          Plataforma JavaScript, frequentemente utilizada para o desenvolvimento de Servidores Web com o
+          framework <em>Express</em>.
+        </p>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-3 card mini-card text-center">
+        <img src="res/img/tecs/android.png" style="max-width: 50%">
+        <h2>Android Java</h2>
+        <p class="text-justify">
+          Desenvolvimento Android nativo tendo acesso às API's do sistema como Bluetooth, Câmera, comunicação
+          USB OTG, etc.
+        </p>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-3 card mini-card text-center">
+        <img src="res/img/tecs/arduino.png" style="max-width: 50%">
+        <h2>Arduino</h2>
+        <p class="text-justify">
+          Prototipagem eletrônica para desenvolvimento de soluções em automação e <em>Internet das Coisas</em>.
+        </p>
+      </div>
+  </div>
+</section>
+
+<footer class="black">
+  <div class="row center-xs start-md">
+    <div class="col-xs-12 col-md-6">
+      <a href="https://br.linkedin.com/in/guilherme-prezzi-779247109" target="_blank"
+         class="button flat white">LinkedIn</a>
+      <a href="http://lattes.cnpq.br/0050026367570715 " target="_blank" class="button flat white">Lattes</a>
+      <a href="mailto:guilhermeprezzi1997@gmail.com" target="_blank" class="button flat white">Email</a>
+    </div>
+    <div class="col-xs-12 col-md-6 text-md-right text-lilac">
+      feito com <i class="icon ion-heart text-red animated infinite pulse"></i> por menosprezzi © 2017
+    </div>
+  </div>
+</footer>
+
+<svg width="0" height="0">
+  <defs>
+    <clipPath id="clip-shape" clipPathUnits="objectBoundingBox">
+      <polygon points="0 0, 0.5 0, 1 1, 0.5 1"/>
+    </clipPath>
+  </defs>
+</svg>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/onscreen/dist/on-screen.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"></script>
+<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+
+<script src="js/utils.js"></script>
+<script src="js/scroll-to.js"></script>
+<script src="js/observe.js"></script>
+<script src="js/mustache-compile.js"></script>
+<script src="js/lego-anm.js"></script>
+<script src="js/terminal.js"></script>
+
+<script src="js/main.js"></script>
+</body>
+
+</html>

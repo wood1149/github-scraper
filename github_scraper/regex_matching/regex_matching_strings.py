@@ -7,8 +7,6 @@ def match_email(line):
     email = re.compile(r'([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)')
     output = re.findall(email,line)  
     if(len(output) > 0):
-        # print("Email found")
-        # print(output)
         return True
     return False
 
@@ -24,7 +22,6 @@ def match_bitcoin(line):
     for regex in regexes:
         output = re.findall(regex,line)  
     if(len(output) > 0):
-        # print("Bitcoin info found")
         return True
     return False
 
@@ -48,7 +45,6 @@ def match_crypto(line):
     for regex in regexes:
         output = re.findall(regex,line)  
     if(len(output) > 0):
-        # print("Crypto key info found")
         return True
     return False
 
@@ -64,7 +60,6 @@ def match_password(line):
     for regex in regexes:
         output = re.findall(regex,line)  
     if(len(output) > 0):
-        # print("Password found")
         return True
     return False
 
@@ -94,13 +89,11 @@ def match_api_key(line):
 
     #only letter
     onlyLetters = re.compile(r'^[a-zA-Z]+$')
-    # regexar = [AWSaccessKeyID,AWSsecretAccessKey,BITaccessKeyID,BITsecretAccessKey,FBaccessKeyID,FLsecretAccessKey,AWSsecretAccessKeyAlternative]
-    regexar = [AWSsecretAccessKey,BITsecretAccessKey,FLsecretAccessKey,AWSsecretAccessKeyAlternative]
+    regexar = [AWSsecretAccessKey,BITsecretAccessKey,FLsecretAccessKey,AWSsecretAccessKeyAlternative,TWsecretAccessKey,LIsecretAccessKey,FSsecretAccessKey]
     
     for exp in regexar:
         output = re.findall(exp,line)  
-    if(len(output) > 0 and onlyLetters.match(output[0]) == None):
-        # print("Api key found")
+    if(len(output) > 0 and onlyLetters.search(output[0]) == None):
         return True
     return False
 

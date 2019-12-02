@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+
+ 
+
+<!--<link rel="stylesheet" href="assets/css/bootstrap.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+  <meta charset="utf-8">
+  <title>Abhinandan Dubey | Stony Brook University</title>
+  <meta name="description" content="Abhinandan Dubey - Stony Brook University">
+  <meta name="author" content="Abhinandan Dubey">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, user">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,300,700|Noto+Serif:400,700' rel='stylesheet' type='text/css'>
+
+  <!-- Facebook Tags
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta property="og:url" content="index.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Abhinandan Dubey - Graduate Student and Researcher, HI Lab | Stony Brook University" />
+  <meta property="og:description" content="Abhinandan Dubey - Graduate Student and Researcher, HI Lab | Stony Brook University" />
+  <meta property="og:image" content="http://www3.cs.stonybrook.edu.co/~adubey/images/abhinandan_dubey.png" />
+
+  <!-- Twitter Tags
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@alivcor_" />
+  <meta name="twitter:title" content="Abhinandan Dubey - Graduate Student and Researcher, HI Lab | Stony Brook University" />
+  <meta name="twitter:description" content="Abhinandan Dubey - Graduate Student and Researcher, HI Lab | Stony Brook University" />
+  <meta name="twitter:image" content="http://www3.cs.stonybrook.edu.co/~adubey/images/abhinandan_dubey.png" />
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <!--<link rel="icon" type="image/png" href="assets/images/favicon/favicon.ico">-->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"> 
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="assets/js/smooth-scroll.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="assets/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="assets/slick/slick-theme.css"/>
+
+  <script type="text/javascript" src="assets/slick/slick.min.js"></script>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="assets/css/normalize.css">
+  <link rel="stylesheet" href="assets/css/skeleton.css">
+  <link rel="stylesheet" href="assets/css/rise.css">
+
+
+  <script>
+  $(document).ready(function(){
+
+    var currently_selected;
+    var latched;
+
+    var smoothScrolling = false;
+
+    var buttonHeight = $('.nominate').outerHeight();
+    var headerHeight = $('.header').outerHeight();
+    var minTopMargin = (headerHeight - buttonHeight)/2;
+    var defaultOffset = $('.nominate').offset().top
+
+    calibrateNavbarPosition();
+    determineLatch();
+
+    $('.navbar .nav-item.current');
+
+    $('.nav-item').smoothScroll({
+      beforeScroll:function(){
+        smoothScrolling = true;
+      }, afterScroll:function(){
+        smoothScrolling = false;
+        calibrateNavbarPosition();
+        determineLatch();
+
+      }
+    }); 
+
+    // $('.nav-item[href="#nominate"]').click(function(){
+    //   $('input').first().focus();
+    // })
+
+    $('.faq').click(function(a,b){
+      $(this).next('p').slideToggle('medium')
+    })
+
+    $(window).scroll(function(){
+      if(!smoothScrolling){
+        calibrateNavbarPosition();
+        determineLatch();
+      }
+    })
+
+    $(window).on({
+      'touchmove': function(a){
+        calibrateNavbarPosition();
+        determineLatch();
+      }
+    })
+
+    $('.judges').slick({
+      infinite:true,
+      slidesToShow:5,
+      slidesToScroll:5,
+      dots:true,
+      rows:2,
+      autoplaySpeed:5000,
+      lazyLoad: 'progressive',
+      responsive: [
+        {
+          breakpoint:1000,
+          settings: {
+            slidesToShow: 4,
+            slidesToScroll:4,
+            dots:true
+          }
+        },
+        {
+          breakpoint:750,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll:3,
+            dots:false
+          }
+        },
+        {
+          breakpoint:550,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll:2,
+            dots:false
+          }
+        }
+      ]
+      // setting-name: setting-value
+    });
+
+    $('.category-select').change(function(e){
+      if(e.target.value == "other"){
+        $('.specify-category').slideDown('fast')
+      } else {
+        $('.specify-category').slideUp('fast')        
+      }
+    });
+
+    function calibrateNavbarPosition() {
+      var height = window.innerHeight;
+      var scrollPosition = document.body.scrollTop;
+
+      var elementId;
+      $('section[id]').each(function(a,element){
+        if(scrollPosition + height/2 > element.offsetTop) {
+          elementId = element.id;
+        }
+      })
+
+      if (elementId != currently_selected) {
+
+        $('.nav-item[href="#' + currently_selected + '"]').removeClass('selected');
+        $('.nav-item[href="#' + elementId + '"]').addClass('selected');          
+
+        currently_selected = elementId;
+      }
+    }
+
+    function determineLatch(){
+
+    //       var buttonHeight = $('.nominate').height();
+    // var headerHeight = $('.header').height();
+    // var minTopMargin = (headerHeight - buttonHeight)/2;
+    // var defaultOffset = $('.nominate').offset().top
+
+      var scrollPosition = document.body.scrollTop;
+      var scrollThreshold = scrollPosition + minTopMargin;
+      if(!latched){
+
+        if (scrollThreshold > defaultOffset){
+          $('.nominate').addClass('latched');
+        } 
+
+        latched = true;
+      } else {
+        if (scrollThreshold < defaultOffset){
+          $('.nominate').removeClass('latched');
+        } 
+
+        latched = false;
+
+      }
+
+    }
+
+  });
+  </script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-81750459-1', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+    <link href="https://fonts.googleapis.com/css?family=Audiowide|Economica|Rajdhani|Sacramento|Satisfy|Squada+One" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300" rel="stylesheet"> 
+</head>
+<body>
+
+        <div class="col-md-12 col-sm-12" style="">
+     
+            <div class="header">
+                
+                <div class="header-bg"></div>
+                <div class="container" style="width:100%">
+                    <a class="logo nav-item" href="#home">
+                    Abhinandan Dubey
+                    </a>
+
+                    <nav class="navbar">
+                    <a class="nav-item" href="#about" title="About">About</a>
+                    <a class="nav-item" href="#research" title="Research">Research</a>
+                        
+                        <a class="nav-item" href="#publications" title="Experience">Publications</a>
+                        <a class="nav-item" href="#software" title="Experience">Software</a>
+                    <a class="nav-item" href="#experience" title="Experience">Experience</a>
+                    <a class="nav-item" href="#coursework" title="Coursework">Coursework</a>
+                    <a class="nav-item" href="#code" title="Code">Code</a>
+                    <a class="nav-item" href="#misc" title="Miscellaneous">Miscellaneous</a>
+                    <a class="nav-item" href="#media" title="Press">Press</a>
+                    <a class="nav-item" href="#social" title="Get In Touch">Get In Touch</a>
+                    </nav>
+                </div>
+            </div>
+
+            <section id="about"  style="padding-bottom: 0rem;padding-top: 10rem;">
+                <div class="container">
+                    <div class="row">
+                        <div class="twelve columns splash">
+                        <!-- <div class="six columns offset-by-three splash">-->
+
+                            <div class="judge">
+                            <div class="judge-image-inner">
+                              <img class="judge-image" src="assets/images/abhinandan_dubey.png" data-lazy="assets/images/abhinandan_dubey.png" />
+                            </div>
+
+                            </div>
+
+                            <h2 class="slogan">Abhinandan Dubey</h2>
+                              <h4 style="font-family: 'Audiowide', cursive;">@alivcor</h4>
+                              <p class="byline">I am currently pursuing my Masters in Computer Science at <a href="www3.cs.stonybrook.edu" target="_blank" class="email">Stony Brook University - The State University of New York.</a>. I am a part of the <a href="http://hi.cs.stonybrook.edu/"  class="email" target="_blank">Human Interactions Lab (Hi! Lab)</a>. I'm pursuing my research in Computer Vision and HCI, being advised by <a href="http://alumni.media.mit.edu/~roys/" target="_blank"  class="email">Prof. Roy Shilkrot </a> (Principal Investigator, HI Lab and Research Affiliate - Fluid Interfaces group, <a href="http://media.mit.edu/" target="_blank"  class="email">MIT Media Lab</a> at the Massachusetts Institute of Technology.)</p>
+
+                            <a class="nominate nav-item" href="mailto:adubey@cs.stonybrook.edu">
+                            <div class="hang"></div>
+                            Mail Me
+                            </a>
+                              &nbsp;&nbsp;&nbsp;&nbsp;
+                              <a class="nominate nav-item" href="assets/pdf/Resume - Abhinandan Dubey.pdf" target="_blank">
+                            <div class="hang"></div>
+                            View Resume Online
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- <div class="row">
+                <div class="eight columns offset-by-two" style="text-align:center;">
+                <div class="testimonial-name">
+                Other Ways To Connect
+                </div>
+                <div class="testimonial"><a href="https://www.linkedin.com/in/abhinandandubey">LinkedIn</a> | <a href="http://you.stonybrook.edu/abhinandan/">StonyBrookYou Page</a></div>
+                </div>
+                </div>-->
+
+            </section>
+
+            <div class="sep"></div>
+
+            <section id="research" style="padding-top: 5rem;">
+
+                <div class="container">
+                    <div class="row" style="margin-bottom:4rem">
+                        <div class="twelve columns col-md-12 col-sm-12">
+                            <h4>Research</h4>
+                            <p>Broadly, my research interests include Machine Learning, Computer Vision and Analytic Combinatorics.</p>
+                                
+                            
+                            <div class="hvr-grow-shadow" style="padding-top:50px">
+                                <div class="three columns col-md-3 col-sm-12">
+                                <img src="assets/images/projects/celldiv.png" style = "max-width:220px; ; padding-top:0px;padding-bottom:20px;"/>
+                                </div>
+                                <div class="nine columns col-md-9 col-sm-12">
+                                <h5>CNN Based Yeast Cell Segmentation in Multi-Modal Fluorescent Microscopy Data</h5>
+                                <p>This project involves using state-of-the-art techniques for image segmentation in high-noise cellular microscopy data. My work involves exploring current techniques including Conditional Random Fields, Edge Detection, Watershed Algorithm and Spectral Clustering and some open-source pipelines such as CellProfiler for image segmentation.</p>
+
+                                <div class="text-align:center">
+                                    <a class="company-faq-button hvr-icon-wobble-horizontal" href="mailto:adubey@cs.stonybrook.edu?subject=Ref:%20Requesting%20details%20on%20your%20cell%20division%20project&body=%0AHi%20Abhinandan,%0A%0AI%20wanted%20to%20know%20more%20about%20your%20project!%0A%0ARegards,%0A" target="_blank">Request Details</a>
+                                  </div>
+                                </div>
+                            </div>
+                            
+                               <div class="hvr-grow-shadow" style="padding-top:50px">
+                                <div class="three columns col-md-3 col-sm-12">
+                                <img src="assets/images/projects/aes.png" style = "max-width:230px; ; padding-top:0px;padding-bottom:20px;"/>
+                                </div>
+                                <div class="nine columns col-md-9 col-sm-12">
+                                <h5>A Two-Fold Exploratory Study on AES</h5>
+                                <p>The present research has been limited to rely heavily on extracting statistical features to evaluate and score essays through training on huge datasets. This makes it impossible for pri- mary school teachers to use such systems for grading. Moreover, until recently, even the systems which involve training on huge datasets yielded average results. We use LSTMs and feed-forward neural networks and devise a supervised system which improves the state-of-the-art system, and also devise an unsupervised system which perform as good as many recent supervised systems.</p>
+
+                                <div class="text-align:center">
+                                    <a class="company-faq-button hvr-icon-wobble-horizontal" href="mailto:adubey@cs.stonybrook.edu?subject=Ref:%20Requesting%20details%20on%20your%20essay%20grading%20project&body=%0AHi%20Abhinandan,%0A%0AI%20wanted%20to%20know%20more%20about%20your%20project!%0A%0ARegards,%0A" target="_blank">Request Details</a>
+                                  </div>
+                                </div>
+                            </div>
+                            
+                           
+                            
+                            <div class="hvr-grow-shadow" style="padding-top:50px">
+                                <div class="three columns col-md-3 col-sm-12">
+                                <img src="assets/images/projects/vgg16.jpeg" style = "max-width:220px; ; padding-top:0px;padding-bottom:20px;"/>
+                                </div>
+                                <div class="nine columns col-md-9 col-sm-12">
+                                <h5>Video Thread Background Scene Classification with VGG16 Features Using Convolutional Neural Networks</h5>
+                                <p>This research project aimed at using the power of deep learning networks to implement a classification model. I implemented a convolutional neural network that runs the logistic regression classifier to map the feature vectors obtained from VGG16 to the scene categories of a famous TV Show.</p>
+
+                                 <div class="text-align:center">
+                                    <a class="company-faq-button hvr-icon-wobble-horizontal" href="assets/pdf/scene-classification.pdf" target="_blank">Paper / Report</a><span style="opacity: 0;">alivcor;</span>
+                                    <a class="company-faq-button hvr-icon-wobble-horizontal" href="assets/pdf/scene-classification-poster.pdf" target="_blank">Quick Look</a>
+                                </div>  
+
+                                </div>
+                            </div>
+                            
+                             
+                            <div class="hvr-grow-shadow" style="padding-top:50px">
+                                <div class="three columns col-md-3 col-sm-12">
+                                <iframe width="240" height="240" src="https://www.youtube.com/embed/zIXRsW7tT-0" frameborder="0" allowfullscreen style="padding-top:0px;padding-bottom:20px;"></iframe>
+                                </div>
+                                <div class="nine columns col-md-9 col-sm-12">
+                                <h5>A Socio-economic Assessment of Climate Vulnerability</h5>
+                                <p>Climate change poses real and present danger to the future of the world. Also at stake is practically every major life form’s existence that resides on this planet. We devised a time-series model on the socio-economic factors contributing to climate change, and produced several visualizations which establish relations between several socio-economic factors. More generally, we have created an educative interface which provides visualiza- tions to trigger climate-aware thought-processes and provides some useful insights through basic statistical and machine learning methods.</p>
+
+                                <div class="text-align:center">
+                                    <a class="company-faq-button hvr-icon-wobble-horizontal" href="assets/pdf/riskisreal_report.pdf" target="_blank">Paper</a>
+                                  </div>
+                                </div>
+                            </div>
+                            
+
+                            <div class="hvr-grow-shadow" style="padding-top:50px">
+                                <div class="three columns col-md-3 col-sm-12">
+                                    <iframe width="240" height="240" src="https://www.youtube.com/embed/WQIlcOc3q80" frameborder="0" allowfullscreen style="padding-top:0px;padding-bottom:20px;"></iframe>
+                                </div>
+                                <div class="nine columns col-md-9 col-sm-12">
+                                <h5>Mosaicing of Aerial Images - Estimating transformations from the image points </h5>
+                                <p>The goal of this was to build a system that maps the correspondences in two images, and warps one image according to a reference image, and merges both of them into a mosaic which provides a larger FOV (Field of View)</p>
+
+
+                                 <div class="text-align:center">
+                                    <a class="company-faq-button hvr-icon-wobble-horizontal" href="https://youtu.be/WQIlcOc3q80" target="_blank">Demo</a>
+                                </div>
+
+
+                                </div>
+                            </div>
+
+                             <div class="hvr-grow-shadow" style="padding-top:50px">
+                                <div class="three columns col-md-3 col-sm-12">
+                                <img src="assets/images/projects/neural.jpeg" style = "max-width:220px;height:220px; ; padding-top:0px;padding-bottom:20px;"/>
+                                </div>
+                                <div class="nine columns col-md-9 col-sm-12">
+                                <h5>Analysis of Neural Network architectures for Supervised Classification</h5>
+                                <p>The goal of this research project was to analyze the performance of various types of neural network architectures including Feed-forward Neural Networks and Competitive Networks over a supervised classification problem using various metrics.</p>
+
+                                 <div class="text-align:center">
+                                    <a class="company-faq-button hvr-icon-wobble-horizontal" href="assets/pdf/analysis-neural-network.pdf" target="_blank">Paper / Report</a><span style="opacity: 0;">alivcor;</span>
+                                    <a class="company-faq-button hvr-icon-wobble-horizontal" href="assets/pdf/analysis-neural-network.png" target="_blank">Quick Look</a>
+                                </div>  
+
+
+                                </div>
+                            </div>
+                            
+                            <div class="hvr-grow-shadow" style="padding-top:50px">
+                                <div class="three columns col-md-3 col-sm-12">
+                                <img src="assets/images/projects/fotp.png" style = "max-width:220px;height:220px; ; padding-top:0px;padding-bottom:20px;"/>
+                                </div>
+                                <div class="nine columns col-md-9 col-sm-12">
+                                <h5>First-order Theorem Proving - Which Features Impact the Most ?</h5>
+                                <p>The aim of this project was to find out simple feature measurements of a conjecture and axioms that sufficiently provide information to determine a good choice of heuristic. Our dataset consists a set of 5 heuristics, each having results from 14 static feature measurements and 39 dynamic feature measurements. The basic units affecting the features include the set of processed clauses, the set of unprocessed clauses and the axioms. </p>
+
+                                <div class="text-align:center">
+                                    <a class="company-faq-button hvr-icon-wobble-horizontal" href="assets/pdf/fotp-report.pdf" target="_blank">Paper</a>
+                                  </div>
+                                </div>
+                            </div>
+
+
+                            <div class="hvr-grow-shadow" style="padding-top:50px">
+                                <div class="three columns col-md-3 col-sm-12">
+                                <img src="assets/images/projects/nyctaxi.png" style = "max-width:220px; ; padding-top:0px;padding-bottom:20px;"/>
+                                </div>
+                                <div class="nine columns col-md-9 col-sm-12">
+                                <h5>The <a href="http://freefinity.github.io" style="color: #1eaedb; text-decoration: none; font-family: 'Oswald', sans-serif;">freefinity</a> Project: Analysis of NYC Cab Services</h5>
+                                <p>This project is a part of a larger research that I am currently into. Using state-of-the-art big data analytics and data mining techniques over a dataset of around 77,414 Megabytes, this project aimed at performing an analysis of commuting patterns, neighborhoods, traffic, tipping patterns, taxi fares (and more) in urban communities. The purpose is to extract useful insights so that any solutions that we derive can be mapped to other large cities.</p>
+
+
+                                 <div class="text-align:center">
+                                    <a class="company-faq-button hvr-icon-wobble-horizontal" href="assets/pdf/data-analysis-nyc.pdf" target="_blank">Paper / Report</a><span style="opacity: 0;">alivcor;</span>
+                                    <a class="company-faq-button hvr-icon-wobble-horizontal" href="assets/pdf/data-analysis-nyc-ppt.pdf" target="_blank">Quick Look</a>
+                                </div>
+                                </div>
+                            </div>
+
+
+                            <div class="hvr-grow-shadow" style="padding-top:50px">
+                                <div class="three columns col-md-3 col-sm-12">
+                                <img src="assets/images/projects/emr.jpg" style = "width:220px; ; padding-top:0px;padding-bottom:20px;"/>
+                                </div>
+                                <div class="nine columns col-md-9 col-sm-12">
+                                <h5>Sentiment Analysis over Common Crawl Corpus Using Amazon Elastic MapReduce (EMR) with AWS S3</h5>
+                                <p>Analyzed over 2,500,000 Megabytes of data on Amazon CommonCrawl using Amazon EMR on an S3 bucket. The project involved finding patterns where people express their feelings as "I feel". Different words that indicated a particular sentiment were collected and grouped using Spark.</p>
+
+
+                                 <div class="text-align:center">
+                                    <a class="company-faq-button hvr-icon-wobble-horizontal" href="assets/morethan30.txt" target="_blank">Results</a>
+                                </div>
+                                </div>
+                            </div>
+
+                            <div class="hvr-grow-shadow" style="padding-top:50px">
+                                <div class="three columns col-md-3 col-sm-12">
+                                <img src="assets/images/projects/maze.png" style = "max-width:220px; ; padding-top:0px;padding-bottom:20px;"/>
+                                </div>
+                                <div class="nine columns col-md-9 col-sm-12">
+                                <h5>An Experimental Comparison of Memory Bounded &amp; A* Algorithms</h5>
+                                <p>The goal of this experiment was to implement and record the running times, depth in the search space of path-finding algorithms. Using Manhattan Distance and NMT Heuristics, our results provide a holistic comparison of the performances of both of the algorithms on the famous 8-Puzzle and 15-Puzzle Problems.</p>
+
+
+                                 <div class="text-align:center">
+                                    <a class="company-faq-button hvr-icon-wobble-horizontal" href="assets/pdf/experimental-comparison-memory.pdf" target="_blank">Paper / Report</a>
+                                </div>
+                                </div>
+                            </div>
+
+                            <div class="hvr-grow-shadow" style="padding-top:50px">
+                                <div class="three columns col-md-3 col-sm-12">
+                                <img src="assets/images/projects/kidney.png" style = "max-width:220px; ; padding-top:0px;padding-bottom:20px;"/>
+                                </div>
+                                <div class="nine columns col-md-9 col-sm-12">
+                                <h5>Classification of CKD Cases Using Multivariate K-Means Clustering</h5>
+                                <p>The automated detection of diseases using Machine Learning Techniques has become a key research area. Although the computational complexity involved in analyzing a huge data set can be extremely high, nonetheless the merits of getting a desired result surely count for the complexity involved in the task. In this paper we adopt the K-Means Clustering Algorithm with a single mean vector of centroids, to classify and make clusters of varying probability of likeliness of suspect being prone to CKD. The results are obtained from a Real Case Data-Set from UCI Machine Learning Repository.</p>
+
+                                <div class="text-align:center">
+                                    <a class="company-faq-button hvr-icon-wobble-horizontal" href="assets/pdf/ckd.pdf" target="_blank">Paper</a>
+                                  </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <section id="publications" style="padding-top: 5rem;">
+
+                <div class="container">
+                    <div class="row" style="margin-bottom:4rem">
+                        <div class="twelve columns">
+                                <h4>Publications</h4>
+                                 <div style="padding-top:10px">
+                                        <div class="nine columns">
+                                          <h5 style="margin-bottom: 0rem;"><a href="http://cvpr2017.thecvf.com/" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">CNN Based Yeast Cell Segmentation in Multi-Modal Fluorescent Microscopy Data</a></h5> 
+                                          <div class="testimonial-name" style="margin-top: 0.5rem;"> Computer Vision for Microscopy Image Analysis (CVMI) - Proceedings of IEEE Conference on Computer Vision and Pattern Recognition (CVPR). </div>
+                                          <div class="testimonial-name" style="margin-top: 0.5rem;">Spring 2017</div>
+                                        </div>
+                                        <div class="three columns">
+                                          <img src="assets/images/cvpr.png" style="max-width:120px; padding-top:0px; padding-left: 15px"/>
+                                        </div>
+                                       
+                                </div>
+                          
+                                 <div style="padding-top:10px">
+                                        <div class="twelve columns">
+                                          <h5 style="margin-bottom: 0rem;"><a href="#" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">On Proving A Special Decomposition of Numbers Using Complex Variable Theory</a></h5> 
+                                          <div class="testimonial-name" style="margin-top: 0.5rem;">Submitted : International Journal of Number Theory - World Scientific.</div>
+                                          <div class="testimonial-name" style="margin-top: 0.5rem;">Fall 2015</div>
+                                        </div>
+                                </div>
+
+                                   <div style="padding-top:10px">
+                                        <div class="seven columns">
+                                          <h5 style="margin-bottom: 0rem;"><a href=" http://pumj.org/docs/Issue_2.pdf" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">A Simplified Analysis To A Generalized Restricted Partitions Problem</a></h5> 
+                                          <div class="testimonial-name" style="margin-top: 0.5rem;">PRINCIPIA, Princeton University</div>
+                                         <div class="testimonial-name" style="margin-top: 0.5rem;">Listed on <i><a href="https://oeis.org/A174061" target="_blank">The Online Encylopedia of Integer Sequences (OEIS #A174061)</a></i></div> 
+                                         <div class="testimonial-name" style="margin-top: 0.5rem;">Winter 2015-16</div>
+                                        </div>
+                                        <div class="three columns">
+                                          <img src="assets/images/principia_logo.png" style="max-width:220px; padding-top:0px; padding-left: 15px"/>
+                                        </div>
+                                        <div class="two columns">
+                                          <img src="assets/images/pu.png" style="max-width:140px; padding-top:20px;"/>
+                                        </div>
+                                </div>
+
+                                 <div style="padding-top:10px">
+                                        <div class="nine columns">
+                                          <h5 style="margin-bottom: 0rem;"><a href=" http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.735.4905&rep=rep1&type=pdf#page=204" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">Classification of CKD Cases Using Multivariate K-Means Clustering</a></h5> 
+                                          <div class="testimonial-name" style="margin-top: 0.5rem;">IJSRP, Volume 5 - Issue 8</div>
+                                          <div class="testimonial-name" style="margin-top: 0.5rem;">Fall 2015</div>
+                                        </div>
+                                        <div class="three columns">
+                                          <img src="http://citeseerx.ist.psu.edu/images/csx_logo.png" style="max-width:220px; padding-top:0px; padding-left: 15px"/>
+                                        </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+            </section>
+            
+            
+            
+            <div class="sep"></div>
+            
+               <section id="software" style="padding-top: 5rem;">
+
+                <div class="container">
+                    <div class="row" style="margin-bottom:4rem">
+                        <div class="twelve columns">
+                                <h4>Software &amp; Open Source Contributions</h4>
+                            
+                                   <div style="padding-top:10px">
+                                        <div class="seven columns">
+                                          <h5 style="margin-bottom: 0rem;"><a href="https://alivcor.github.io/segraph/" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">segraph - Library for creating graphs from SLIC segments</a></h5> 
+                                            <div class="testimonial-name" style="margin-top: 0.5rem;"><a href="https://pypi.python.org/pypi/segraph" style="text-decoration:None; color: #76e1e8;    font-size: 1.7rem;    font-weight: normal;" target="_blank">Python Package Index | Link</a></div>
+                                          <div class="testimonial-name" style="margin-top: 0.5rem;">Summer 2017</div>
+                                        </div>
+                                        <div class="three columns">
+                                          <img src="assets/images/segraph.png" style="max-width:220px; padding-top:0px; padding-left: 15px"/>
+                                        </div>
+                                        <div class="two columns">
+                                          <img src="assets/images/pypi.png" style="max-width:140px; padding-top:20px;"/>
+                                        </div>
+                                    </div>
+                            
+                                    <div style="padding-top:20px">
+                                        <div class="seven columns">
+                                          <h5 style="margin-bottom: 0rem;"><a href="https://github.com/alivcor/aes" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">DeepScore - Supervised Automated Essay Scoring Using Deep Learning</a></h5> 
+                                            <div class="testimonial-name" style="margin-top: 0.5rem;"><a href="https://github.com/alivcor/aes" style="text-decoration:None; color: #76e1e8;    font-size: 1.7rem;    font-weight: normal;" target="_blank">GitHub</a></div>
+                                          <div class="testimonial-name" style="margin-top: 0.5rem;">Spring 2017</div>
+                                        </div>
+                                        <div class="three columns">
+                                          <img src="assets/images/deepscore_transparent.png" style="max-width:240px; padding-top:0px; padding-left: 0px"/>
+                                        </div>
+                                        <div class="two columns">
+                                          <img src="assets/images/tf.png" style="max-width:80px; padding-top:30px;"/>
+                                        </div>
+                                    </div>
+                            
+                                    <div style="padding-top:10px">
+                                        <div class="nine columns" style="padding-top:20px">
+                                          <h5 style="margin-bottom: 0rem;"><a href="https://github.com/alivcor/aes" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">UnTraSE - Unsupervised Trait Specific Automated Essay Scoring Engine </a></h5> 
+                                            <div class="testimonial-name" style="margin-top: 0.5rem;"><a href="https://github.com/alivcor/aes" style="text-decoration:None; color: #76e1e8;    font-size: 1.7rem;    font-weight: normal;" target="_blank">GitHub</a></div>
+                                          <div class="testimonial-name" style="margin-top: 0.5rem;">Spring 2017</div>
+                                        </div>
+                                        <div class="three columns" style="padding-top:20px">
+                                          <img src="assets/images/UNTRASE_logo.png" style="max-width:160px; padding-top:0px; padding-left: 15px"/>
+                                        </div>
+                                        
+                                    </div>
+                            
+
+                            </div>
+
+                        </div>
+                    </div>
+
+            </section>
+            
+            
+
+            <div class="sep"></div>
+
+            <section id="experience" style="padding-top: 5rem;">
+
+                <div class="container">
+                    <h4>Education &amp; Experience </h4>
+                    <div class="row" style="margin-bottom:4rem">
+
+                        <div class="six columns col-md-6 col-sm-12">
+                            <div class="row" style="margin-bottom: 50px;">
+                                <div class="three columns">
+                                  <img src="assets/images/sbulogo.png" style="max-width: 100px; " class="img-circularimg"/>
+                                </div>
+
+                                <div class="nine columns">
+                                    <h5 style="padding-top:20px; margin-bottom: 0rem;">Stony Brook University</h5>
+                                    <div class="testimonial-name" style="margin-top: 0.5rem;">MS, Computer Science </div><div class="testimonial-name" style="margin-top: 0.5rem;"> 2016 - 17 | 3.338 / 4 (Cum.) | 3.75 / 4 (Lat.)</div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="three columns">
+                                  <img src="assets/images/bias.jpg" style="max-width: 100px;" class="img-circularimg"/>
+                                </div>
+                              <div class="nine columns">
+                                  <h5 style="padding-top:0px;margin-bottom: 0rem;">Birla Institute of Applied Sciences</h5>
+                                  <div class="testimonial-name" style="margin-top: 0.5rem;">B.Tech (Honors), Computer Science &amp; Engineering | 2012 - 16 | 3.77 / 4</div>
+                                  <div class="testimonial-name" style="margin-top: 0.5rem; font-weight: normal; font-size:12px">Undergraduate Dissertation/Advanced Project : <a target="_blank" class="email" href="" style="display: inline">"Automated Essay Grading Using Machine Learning"</a> supervised by Dr. Sandesh Tripathi</div>
+                                  <ul>
+                                    <li>
+                                      <i class="fa fa-star star-icon"></i>
+                                      <div class="li-contents">First Division with Honors, Stood first in the class.</div>
+                                    </li>
+
+                                    <li>
+                                      <i class="fa fa-star star-icon"></i>
+                                      <div class="li-contents">Several co-curricular awards. Details can be found out <a target="_blank" class="email" href="">here</a></div>
+                                    </li>
+                                  </ul>
+                              </div>
+                            </div>
+                            <p><i>I did my high school from Delhi Public School and passed out with a Scholar Badge for academic excellence for seven consecutive years.</i></p>
+
+                            <h5>Tag Cloud</h5>
+                            <p>I believe a tag cloud provides a great description.</p>
+                            <div class="categories">
+
+                              <div class="category hvr-bob">Artificial Intelligence</div>
+
+                              <div class="category hvr-bob">Computer Vision</div>
+
+                              <div class="category hvr-bob">Analytic Combinatorics</div>
+
+                              <div class="category hvr-bob">Data Science</div>
+
+                              <div class="category hvr-bob">Design</div>
+
+                              <div class="category hvr-bob">Software Development</div>
+
+                              <div class="category hvr-bob">Management</div>
+
+                              <div class="category hvr-bob">FinTech</div>
+
+                              <div class="category hvr-bob">Mathematics</div>
+
+                              <div class="category hvr-bob">Coffee</div>
+
+                              <div class="category hvr-bob">Research</div>
+
+                              <div class="category hvr-bob">Code</div>
+
+                              <div class="category hvr-bob">Web Development</div>
+
+                              <div class="category hvr-bob">Reading</div>
+
+                              <div class="category hvr-bob">Literature</div>
+
+                              <div class="category hvr-bob">Drawing</div>
+
+                              <div class="category hvr-bob">Art</div>
+
+                              <div class="category hvr-bob">Sketching</div>
+
+                              <div class="category hvr-bob">Blogging</div>
+
+                              <div class="category hvr-bob">Designing</div>
+
+                              <div class="category hvr-bob">Travel</div>
+
+                              <div class="category hvr-bob">Quora</div>
+
+                              <div class="category hvr-bob">YouTube</div>
+
+                              <div class="category hvr-bob">Cooking</div>
+                            </div>
+
+                        </div>
+
+                        <div class="six columns col-md-6 col-sm-12">
+                         <div class="row " style="margin-bottom: 30px;">
+                                <div class="three columns">
+                                  <img src="http://www3.cs.stonybrook.edu/~adubey/assets/images/experience/nomura.png" style="max-width:100px" />
+                                    
+                                </div>
+
+                                <div class="nine columns">
+                                    <h5 style="padding-top:0px; margin-bottom: 0rem;"><a href="http://www.nomura.com" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">Nomura Securities, New York City</a></h5>
+                                    <div class="testimonial-name" style="margin-top: 0.5rem;">Technology Analyst - Intern (RCIT - Data Management)</div>
+                                    <div class="testimonial-name" style="margin-top: 0.5rem;">June - August 2017</div>
+                                </div>
+                            </div>
+                            <div class="row " style="margin-bottom: 30px;">
+                                <div class="three columns">
+                                  <img src="assets/images/experience/mitmedialab.png" style="max-width:100px" />
+                                    <img src="assets/images/experience/mit2.png" style="max-width:60px; padding-left:20px;" />
+                                </div>
+
+                                <div class="nine columns">
+                                    <h5 style="padding-top:20px; margin-bottom: 0rem;"><a href="http://media.mit.edu/" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">MIT Media Lab</a></h5>
+                                    <div class="testimonial-name" style="margin-top: 0.5rem;">Innovator | Innovating For Billions Bootcamp</div>
+                                    <div class="testimonial-name" style="margin-top: 0.5rem;">January 2016</div>
+                                </div>
+                            </div>
+
+                            <div class="row " style="margin-bottom: 30px;">
+                              <div class="three columns">
+                                  <img src="assets/images/experience/ennovent2.png" style="max-width:120px; padding-top:30px;  margin-left:-10px;"/>
+                                </div>
+                              <div class="nine columns">
+                                  <h5 style="margin-bottom: 0rem;"><a href="http://ennovent.com/" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">Ennovent, Austria</a></h5>
+                                  <div class="testimonial-name" style="margin-top: 0.5rem;">Research Internship</div>
+                                  <div class="testimonial-name" style="margin-top: 0.5rem;">Fall 2014</div>
+                              </div>
+                            </div>
+
+                            <!--<div class="row " style="margin-bottom: 30px;">
+                              <div class="three columns">
+                                  <img src="assets/images/experience/meramedicare.png" style="max-width:80px; padding-left:10px;"/>
+                                </div>
+                              <div class="nine columns">
+                                  <h5 style="margin-bottom: 0rem;"><a href="http://meramedicare.com/" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">MeraMedicare, New Delhi</a></h5>
+                                  <div class="testimonial-name" style="margin-top: 0.5rem;">Full-stack Web Developer - Intern</div>
+                                  <div class="testimonial-name" style="margin-top: 0.5rem;">Fall 2014</div>
+                              </div>
+                            </div>-->
+
+                            <div class="row " style="margin-bottom: 30px;">
+                              <div class="three columns">
+                                  <img src="assets/images/experience/hp.png" style="max-width:80px; padding-left:10px;"/>
+                                </div>
+                              <div class="nine columns">
+                                  <h5 style="margin-bottom: 0rem;"><a href="http://hp.com/" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">Hewlett Packard</a></h5>
+                                  <div class="testimonial-name" style="margin-top: 0.5rem;">Summer Trainee</div>
+                                  <div class="testimonial-name" style="margin-top: 0.5rem;">Summer 2014</div>
+                              </div>
+                            </div>
+
+                            <div class="row " style="margin-bottom: 30px;">
+                              <div class="three columns">
+                                  <img src="assets/images/experience/edcite.png" style="max-width:100px; padding-left:0px;padding-top:20px"/>
+                                </div>
+                              <div class="nine columns">
+                                  <h5 style="margin-bottom: 0rem;"><a href="http://edcite.com/" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">Edcite</a></h5>
+                                  <div class="testimonial-name" style="margin-top: 0.5rem;">Cloud Applications - SDET Intern</div>
+                                  <div class="testimonial-name" style="margin-top: 0.5rem;">Fall 2013</div>
+                              </div>
+                            </div>
+                            <div class="row " style="margin-bottom: 30px;">
+                                <div class="three columns">
+                                  <img src="assets/images/experience/cf.jpeg" style="max-width:100px; padding-left:0px;"/>
+                                </div>
+                              <div class="nine columns">
+                                  <h5 style="margin-bottom: 0rem;"><a href="http://cloudfinch.com/" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">Cloudfinch</a></h5> 
+                                  <div class="testimonial-name" style="margin-top: 0.5rem;">Software Business Development - Intern</div>
+                                  <div class="testimonial-name" style="margin-top: 0.5rem;">Summer 2013</div>
+                              </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <div class="sep"></div>
+    
+            <section id="coursework" style="padding-top: 5rem;">
+                
+            <div class="container">
+            <div class="row" style="margin-bottom:2rem">
+            <div class="twelve columns">
+                <h4>Coursework</h4>
+
+                <p>At Stony Brook University, I have taken CSE-527 (<b>Computer Vision</b>) by Prof. Minh Hoai Nguyen, CSE-564 (<b>Visualization &amp; Visual Analytics</b>) by Prof. Klaus Mueller, CSE-628 (<b>Natural Language Processing</b>), CSE-537 (<b>Artifcial Intelligence</b>) by Prof. Niranjan Balasubramanian, CSE-545 (<b>Big Data Analytics</b>) by Prof. Andrew Schwartz, CSE-537 (Fundamentals of Computer Networks) by Prof. Aruna Balasubramanian and CSE-548 (Analysis of Algorithms) by Prof. Rezaul Chowdhury</p>
+
+
+                <p><a href="assets/pdf/bias_courses.pdf" target="_blank" class="email">Here</a> is a list if courses I took at Birla Institute of Applied Sciences. I took Soft Computing as my elective course. </p>
+
+                <h4>Online / Independent Coursework and Certifications</h4>
+                <p>I try my best to learn outside the classroom as well. I really like taking MOOCs time-to-time. They allow us to explore different areas without academic constraints. </p>
+                
+                <div>
+                        <div class="eight columns">
+                          <h5 style="margin-bottom: 0rem;"><a href="assets/pdf/moocs/health.pdf" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">Theory of Computation</a></h5> 
+                          <div class="testimonial-name" style="margin-top: 0.5rem;">MECR - Microsoft Research</div>
+                          <div class="testimonial-name" style="margin-top: 0.5rem;">Spring 2015</div>
+                        </div>
+                        <div class="two columns">
+                          <img src="assets/images/moocs/mres.png" style="max-width:120px; padding-left:25px;padding-top:15px;"/>
+                        </div>
+                        <div class="two columns">
+                          <img src="assets/images/moocs/microsoft.png" style="max-width:100px; padding-top:30px;"/>
+                        </div>
+                </div>
+                
+                <div>
+                        <div class="eight columns">
+                          <h5 style="margin-bottom: 0rem;"><a href="assets/pdf/moocs/vision.pdf" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">Discrete Interference and Learning In Artificial Vision</a></h5> 
+                          <div class="testimonial-name" style="margin-top: 0.5rem;">CentraleSupélec / École Centrale - Paris</div>
+                          <div class="testimonial-name" style="margin-top: 0.5rem;">November 2014</div>
+                        </div>
+                        <div class="two columns">
+                          <img src="assets/images/moocs/csup.png" style="max-width:160px; padding-top:10px;"/>
+                        </div>
+                        <div class="two columns">
+                          <img src="assets/images/moocs/coursera.png" style="max-width:100px; padding-top:30px;"/>
+                        </div>
+                </div>
+
+                <div style="padding-top:120px">
+                        <div class="eight columns">
+                          <h5 style="margin-bottom: 0rem;"><a href="assets/pdf/moocs/math.pdf" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">Effective Thinking Through Mathematics</a></h5> 
+                          <div class="testimonial-name" style="margin-top: 0.5rem;">University of Texas at Austin</div>
+                          <div class="testimonial-name" style="margin-top: 0.5rem;">May 2014</div>
+                        </div>
+                        <div class="two columns">
+                          <img src="assets/images/moocs/uta.png" style="max-width:160px; padding-top:30px;"/>
+                        </div>
+                        <div class="two columns">
+                          <img src="assets/images/moocs/edx.png" style="max-width:60px; padding-top:40px; padding-left:30px"/>
+                        </div>
+                </div>
+
+
+                <div style="padding-top:120px">
+                        <div class="eight columns">
+                          <h5 style="margin-bottom: 0rem;"><a href="assets/pdf/moocs/quantum.pdf" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">Quantum Mechanics &amp; Quantum Computation</a></h5> 
+                          <div class="testimonial-name" style="margin-top: 0.5rem;">UC Berkeley</div>
+                          <div class="testimonial-name" style="margin-top: 0.5rem;">September 2013</div>
+                        </div>
+                        <div class="two columns">
+                          <img src="assets/images/moocs/ucb.png" style="max-width:160px; padding-top:20px;"/>
+                        </div>
+                        <div class="two columns">
+                          <img src="assets/images/moocs/edx.png" style="max-width:60px; padding-top:40px; padding-left:30px"/>
+                        </div>
+                </div>
+
+
+                <div style="padding-top:120px">
+                        <div class="eight columns">
+                          <h5 style="margin-bottom: 0rem;"><a href="assets/pdf/moocs/strategy.pdf" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">Foundations of Business Strategy</a></h5> 
+                          <div class="testimonial-name" style="margin-top: 0.5rem;">Darden School of Business, University of Virginia</div>
+                          <div class="testimonial-name" style="margin-top: 0.5rem;">July 2014</div>
+                        </div>
+                        <div class="two columns">
+                          <img src="assets/images/moocs/darden.jpeg" style="max-width:90px; padding-left:40px;"/>
+                        </div>
+                        <div class="two columns">
+                          <img src="assets/images/moocs/coursera.png" style="max-width:100px; padding-top:30px;"/>
+                        </div>
+                </div>
+
+                <div style="padding-top:120px">
+                        <div class="eight columns">
+                          <h5 style="margin-bottom: 0rem;"><a href="assets/pdf/moocs/health.pdf" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">Nutrition, Health, and Lifestyle: Issues and Insights</a></h5> 
+                          <div class="testimonial-name" style="margin-top: 0.5rem;">Vanderbilt University</div>
+                          <div class="testimonial-name" style="margin-top: 0.5rem;">July 2014</div>
+                        </div>
+                        <div class="two columns">
+                          <img src="assets/images/moocs/vu.png" style="max-width:120px; padding-left:25px;"/>
+                        </div>
+                        <div class="two columns">
+                          <img src="assets/images/moocs/coursera.png" style="max-width:100px; padding-top:30px;"/>
+                        </div>
+                </div>
+
+
+            </div>
+            </div>
+            </div>
+            </section>
+            <div class="sep"></div>
+            
+            
+            <section id="code" style="padding-top: 3rem;">
+            <div class="container">
+            <div class="row" style="margin-bottom:2rem">
+            <div class="twelve columns">
+                <h4>Competitive Programming / Hackathons</h4>
+                    <p>Hackerrank : <a href="https://www.hackerrank.com/alivcor" class="email" target="_blank">http://www.hackerrank.com/alivcor</a></p>
+                    
+                    <div style="padding-top:10px">
+                        <div class="nine columns">
+                          <h5 style="margin-bottom: 0rem;"><a href="https://devpost.com/software/alexa-fitness-pal" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">"Alexa Fitness Pal" | Hack@CEWIT ' 17 </a></h5> 
+                          <div class="testimonial-name" style="margin-top: 0.5rem;">Hack@CEWIT</div>
+                          <div class="testimonial-name" style="margin-top: 0.5rem;">February 2017</div>
+                        </div>
+                        <div class="three columns">
+                          <img src="assets/images/cewithack.png" style="max-width:270px;"/>
+                        </div>
+                    </div>
+                
+                   <div style="padding-top:10px">
+                        <div class="nine columns">
+                          <h5 style="margin-bottom: 0rem;"><a href="https://www.hackerrank.com/results/real-data-contest-april-2016/alivcor" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">Real Data 2016 - Annual Data Science Contest</a></h5> 
+                          <div class="testimonial-name" style="margin-top: 0.5rem;">HackerRank</div>
+                          <div class="testimonial-name" style="margin-top: 0.5rem;">April 2016</div>
+                        </div>
+                        <div class="three columns">
+                          <img src="assets/images/hrlogo.png" style="max-width:100px; padding-top:0px; padding-left: 85px"/>
+                        </div>
+                    </div>
+
+                    <div style="padding-top:10px">
+                        <div class="nine columns">
+                          <h5 style="margin-bottom: 0rem;"><a href="https://www.hackerrank.com/results/101hack41/alivcor" style="text-decoration:None; color: #76e1e8;    font-size: 2rem;    font-weight: normal;" target="_blank">101 Hack - 41<sup>st</sup></a></h5> 
+                          <div class="testimonial-name" style="margin-top: 0.5rem;">HackerRank</div>
+                          <div class="testimonial-name" style="margin-top: 0.5rem;">September 2016</div>
+                        </div>
+                        <div class="three columns">
+                          <img src="assets/images/hrlogo.png" style="max-width:100px; padding-top:0px; padding-left: 85px"/>
+                        </div>
+                    </div>
+
+            </div>
+            </div>
+            </div>
+            </section>
+            <div class="sep"></div>
+
+            <section id="misc" style="padding-top: 5rem;">
+                <div class="container">
+                <div class="row" style="margin-bottom:4rem">
+                <div class="twelve columns">
+                    <h4>Miscellaneous</h4>
+                    <p>
+                  <ul style="font-size: 16px">
+                       <li>
+                          <i class="fa fa-star star-icon"></i>
+                          <div class="li-contents">I secured an All India Rank of 176 in Joint Entrance Screening Test, 2016</div>
+                        </li>
+
+                       <li>
+                          <i class="fa fa-star star-icon"></i>
+                           <div class="li-contents">I was selected for the prestigious IIT-Bombay (Indian Institute of Technology - Mumbai) Research Fellowship Awards, 2015 under <a href="http://www.its.caltech.edu/~nbalacha/" class="email" target="_blank">Dr. Niranjan Balachandran</a> (Ph.D., Ohio State University &amp; Harry Bateman Research Instructor at the California Institute of Technology)</div>
+                        </li>
+                      <li>
+                          <i class="fa fa-star star-icon"></i>
+                          <div class="li-contents">I was offered admission to top Masters programs across the United States by several universities, including the New York University, Vanderbilt University, the University of Florida, Michigan Technological University, Arizona State University, Northeastern University, the University of Texas at Dallas and the University of Illinois at Chicago. I chose to attend Stony Brook University</div>
+                        </li>
+                        <li>
+                          <i class="fa fa-star star-icon"></i>
+                          <div class="li-contents">I was awarded the prestigious top 0.1 % merit certificate in Information Technology by the Central Board of Secondary Education.</div>
+                        </li>
+
+
+                      </ul>
+                    </p>
+
+                </div>
+                </div>
+                </div>
+            </section>
+            <div class="sep"></div>
+            
+
+            <section id="media" style="padding-top: 5rem;">
+            <div class="container">
+            <div class="row" style="margin-bottom:4rem">
+            <div class="twelve columns">
+                <h4>Media / Press Coverage</h4>
+
+                <a href="http://educationtimes.com/article/11/2015112320151120170218609673f6064/Interns-beyond-vacations.html" class="email" target="_blank" style="color: #fff"><h5 style="color: #fff">Education Times - Times of India "Interns beyond vacations" covered by Rahat Bano (Times of India).</h5></a>
+                <br/>
+                <a href="http://www.twenty19.com/blog/5-twenty19-profiles-must-check/" class="email" target="_blank" style="color: #fff"><h5 style="color: #fff">5 Student Profiles you must check by Shwetha (Twenty19) - India's largest Internship Portal</h5></a>
+
+
+            </div>
+            </div>
+            </div>
+            </section>
+            <div class="sep"></div>
+            
+            <div>
+            <script type="text/javascript">
+                jQuery(document).ready(function ($) {
+
+
+                    setInterval(function () {
+                    moveRight();
+                    }, 1000);
+
+                    var slideCount = $('#slider ul li').length;
+                    var slideWidth = $('#slider ul li').width();
+                    var slideHeight = $('#slider ul li').height();
+                    var sliderUlWidth = slideCount * slideWidth;
+
+                    $('#slider').css({ width: slideWidth, height: slideHeight });
+
+                    $('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
+
+                    $('#slider ul li:last-child').prependTo('#slider ul');
+
+                    function moveLeft() {
+                    $('#slider ul').animate({
+                        left: + slideWidth
+                    }, 200, function () {
+                        $('#slider ul li:last-child').prependTo('#slider ul');
+                        $('#slider ul').css('left', '');
+                    });
+                    };
+
+                    function moveRight() {
+                    $('#slider ul').animate({
+                        left: - slideWidth
+                    }, 200, function () {
+                        $('#slider ul li:first-child').appendTo('#slider ul');
+                        $('#slider ul').css('left', '');
+                    });
+                    };
+
+                    $('a.control_prev').click(function () {
+                    moveLeft();
+                    });
+
+                    $('a.control_next').click(function () {
+                    moveRight();
+                    });
+
+                    });
+                    </script>
+
+            <style>
+
+                        #slider {
+                        position: relative;
+                        overflow: hidden;
+                        margin: 20px auto 0 auto;
+                        border-radius: 4px;
+                        }
+
+                        #slider ul {
+                        position: relative;
+                        margin: 0;
+                        padding: 0;
+                        height: 200px;
+                        list-style: none;
+                        }
+
+                        #slider ul li {
+                        position: relative;
+                        display: block;
+                        float: left;
+                        margin: 0;
+                        padding: 0;
+                        width: 500px;
+                        height: 300px;
+                        background: #ccc;
+                        text-align: center;
+                        line-height: 300px;
+                        }
+
+                        a.control_prev, a.control_next {
+                        position: absolute;
+                        top: 40%;
+                        z-index: 999;
+                        display: block;
+                        padding: 4% 3%;
+                        width: auto;
+                        height: auto;
+                        background: #2a2a2a;
+                        color: #fff;
+                        text-decoration: none;
+                        font-weight: 600;
+                        font-size: 18px;
+                        opacity: 0.8;
+                        cursor: pointer;
+                        }
+
+                        a.control_prev:hover, a.control_next:hover {
+                        opacity: 1;
+                        -webkit-transition: all 0.2s ease;
+                        }
+
+                        a.control_prev {
+                        border-radius: 0 2px 2px 0;
+                        }
+
+                        a.control_next {
+                        right: 0;
+                        border-radius: 2px 0 0 2px;
+                        }
+        </style>
+        </div>
+            
+            <section id="art" style="padding-top: 5rem;">
+                <div class="container">
+                <div class="row" style="margin-bottom:4rem">
+                <div class="twelve columns">
+                    <h4>Art</h4>
+                      <div class="six columns">
+                          <p>
+                              I love art. Sometimes I wish I had gone to an Art School instead of a Math School. But that is fine. May be I'll go to one in future. For now, I paint whenever I feel like.
+                            <ul style="font-size: 16px">
+                             
+                           <li>
+                              <i class="fa fa-star star-icon"></i>
+                              <div class="li-contents"><a href="http://www.vétiver.com" class="email" target="_blank" style="color: #fff">Vétiver</a> - Something I came up with recently.</div>
+                            </li>
+                           <li>
+                              <i class="fa fa-star star-icon"></i>
+                              <div class="li-contents"><a href="https://artinate.wordpress.com" class="email" target="_blank" style="color: #fff">Artinate</a> - Really old - Primary school stuff - I have tried to scan and upload my paintings and sketches on my wordpress blog.</div>
+                            </li>
+
+                           <li>
+                              <i class="fa fa-star star-icon"></i>
+                               <div class="li-contents">I won the best painting award in the Annual Painting Competition organized by <b>Bhartiya Art Education Society.</b></div>
+                            </li>
+                          <li>
+                              <li>
+                              <i class="fa fa-star star-icon"></i>
+                               <div class="li-contents">I have won over 50 certificates and medals in various Art, Craft and Painting competitions during my schooling at <b>Delhi Public School.</b></div>
+                            </li>
+                          <li>
+
+                          </ul>
+                    </p>
+
+                    </div>
+                      <div class="five columns">
+                        <!--<div id="slider">
+                          <a class="control_next">>></a>
+                          <a class="control_prev"><<</a>
+                          <ul>
+                            <li><img src="assets/art/3.jpeg"/></li>
+                            <li style="background: #aaa;"><img src="assets/art/2.jpeg"/></li>
+                            <li><img src="assets/art/1.jpeg"/></li>
+                               <li style="background: #aaa;"><img src="assets/art/4.jpeg"/></li>
+                          </ul>  
+                        </div>-->
+                       <img src="assets/art/vetiver.png" style="max-width:350px; margin-left:35px;"/>
+                    </div>
+                </div>
+                </div>
+                </div>
+            </section>
+            <div class="sep"></div>
+
+
+            <section id="liter" style="padding-top: 5rem;">
+            
+                <div class="container">
+                <div class="row" style="margin-bottom:4rem">
+                <div class="twelve columns">
+                    <h4>For The Love of Literature</h4>
+
+                          <p>
+                              I like to write and read. Check out my blogs:
+                            <ul style="font-size: 16px">
+                           <li>
+                              <i class="fa fa-star star-icon"></i>
+                              <div class="li-contents"><a href="https://artinate.wordpress.com" class="email" target="_blank" style="color: #fff">Castles In The Sea</a> - I blog about travel, literature, art, and some random stuff sometimes.</div>
+                            </li>
+
+                           <li>
+                              <i class="fa fa-star star-icon"></i>
+                               <div class="li-contents">I read Fiction (except for Sci-Fi, which is better left for Movies and the TV) and Non-Fiction. My personal favorites are "10%  Happier" by Dan Harris, "Eat Pray Love" by Elizabeth Gilbert, "A Passage to India" by E. M. Forster, "Life is What You Make It" by Preeti Shenoy, "The Alchemist" by Paulo Coelho and "The Goldfinch" by Donna Tartt.  I have to stop, the list goes on.</div>
+                            </li>
+                          <li>
+
+
+                          </ul>
+                    </p>
+
+                </div>
+                </div>
+                </div>
+            </section>
+
+
+            <div class="sep"></div>
+
+             <style>
+                .twt-wrapper .panel-body {
+                max-height:650px;
+                overflow:auto;
+                }
+                .twt-wrapper .media-list .media img {
+                width:64px;
+                height:64px;
+                border:2px solid #e5e7e8;
+                }
+                .twt-wrapper .media-list .media {
+                border-bottom:1px dashed #efefef;
+                margin-bottom:25px;
+                }
+            </style>
+
+
+            <section id="newsfeed" style="padding-top: 5rem;">
+            
+                <center>
+                <a class="twitter-timeline"  href="https://twitter.com/hashtag/alivcor_feed" data-widget-id="865711647607971840">#alivcor_feed Tweets</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </center>
+                <script>
+                document.getElementById("twitter-widget-0").width = "700px";
+                </script>
+
+            </section>
+
+            <div class="sep"></div>
+
+            <section id="social" style="padding-top: 5rem;">
+
+                <div class="container">
+                <div class="row" style="margin-bottom:4rem">
+                <div class="twelve columns">
+                    <h4>Get In Touch</h4>
+
+                  <ul class="share-buttons" style="text-align:center">
+                      <li><a href="https://github.com/alivcor" target="_blank" title="GitHub"><img alt="GitHub" src="http://www.freeiconspng.com/uploads/git-github-hub-icon-25.png"  style="height:68px;"></a></li>
+                <li><a href="https://www.facebook.com/AbhinandanDubey" title="Facebook" target="_blank"><img alt="Facebook" src="assets/images/social/Facebook.png"></a></li>
+                <li><a href="https://www.instagram.com/alivcor/" target="_blank" title="Instagram"><img alt="Instagram" src="assets/images/social/Instagram.png"></a></li>
+                <li><a href="https://www.linkedin.com/in/abhinandandubey" target="_blank" title="LinkedIn"><img alt="LinkedIn" src="assets/images/social/LinkedIn.png"></a></li>
+                <li><a href="http://castlesinthesea.com/" target="_blank" title="Blog"><img alt="Blog" src="assets/images/social/Wordpress.png"></a></li>
+                <li><a href="http://github.com/alivcor" target="_blank" title="GitHub"><img alt="GitHub" src="assets/images/social/Github.png"></a></li>
+                <li><a href="mailto:adubey@cs.stonybrook.edu" target="_blank" title="Mail"><img alt="Mail" src="assets/images/social/Email.png"></a></li>
+                </ul>
+                    <center>
+                <iframe src="https://githubbadge.appspot.com/alivcor" style="border: 0;height: 115px;width: 200px;"></iframe>&nbsp;&nbsp;&nbsp;&nbsp;
+                     <a href="https://scholar.google.com/citations?user=IO3cGAIAAAAJ&hl=en" target="_blank" title="Mail"><img alt="Google Scholar" src="assets/images/social/scholar.png"></a></center>
+
+                </div>
+                </div>
+                </div>
+            </section>
+
+        </div>
+    
+    
+
+
+       
+    
+      
+
+
+
+        
+
+       
+
+
+       
+
+        <section class="footer">
+            
+            <div class="container">
+            <div class="copy">
+            Stony Brook, New York - USA &nbsp; | &nbsp;
+            <a class="nav-item back-to-top" href="#home">Back to Top</a>
+            </div>
+            </div>
+        </section>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+
+</body>
+
+</html>

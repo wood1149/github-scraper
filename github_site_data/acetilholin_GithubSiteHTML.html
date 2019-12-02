@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Author: Gregor Kosmina -->
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/png" href="favicon.ico">
+    <!-- Vue js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <!-- Vue js animate -->
+    <link rel="stylesheet" href="https://unpkg.com/vue2-animate/dist/vue2-animate.min.css"/>
+
+      <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Avto Welt d.o.o.</title>
+    <!-- Styling files -->
+    <link rel="stylesheet" href="custom-style.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/arrow.css">
+    <link rel="stylesheet" href="css/fixed.css">
+    <link rel="stylesheet" href="css/lightbox.css">
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/owl.theme.default.css">
+    <link rel="stylesheet" href="css/waypoints.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<body data-spy="scroll" data-target="#navbarResponsive">
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<!-- JS -->
+<script src="js/custom.js"></script>
+<script src="js/jquery.counterup.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/lightbox.js"></script>
+<script src="js/owl.carousel.js"></script>
+<script src="js/validator.js"></script>
+<script src="js/waypoints.js"></script>
+
+<div id="home">
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="img/logo-1.png"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="custom-toggler-icon"><i class="fas fa-bars"></i></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <span class="nav-link lang-m-hide">
+                            <div class="dropdown">
+                              <button class="btn transparent-button dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <i class="fas fa-globe-americas" aria-hidden="true"></i>
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item custom-color custom-item" href="http://avtowelt.com/en">ENG</a>
+                              </div>
+                            </div>
+                        </span>
+                    </li>
+                    <li class="nav-item lang-m-show">
+                        <a class="nav-link" href="http://avtowelt.com/en">
+                            <i class="fas fa-globe-americas" aria-hidden="true"></i>
+                            ENG
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Domov</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">O nas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#cars">Ponudba</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#import-and-calculation">Uvoz</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Kontakt</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="video-background">
+        <div class="video-wrap">
+            <div id="video">
+                <video id="bgvid" playsinline autoplay muted loop>
+                    <source src="./img/video.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+    <div class="landing">
+        <div class="home-wrap">
+            <div class="home-inner">
+            </div>
+        </div>
+    </div>
+    <div class="caption text-center">
+        <div class="os-animation" data-animation="bounceInUp" data-delay=".1">
+            <h1 class="main-title"> Avto Welt</h1>
+        </div>
+        <div class="os-animation" data-animation="bounceInUp" data-delay=".8">
+            <h3 class="sub-title">Premium selection & fair price</h3>
+        </div>
+        <div class="os-animation" data-animation="bounceInUp" data-delay="1s">
+            <a class="btn btn-outline-light btn-lg" href="#about">O nas</a>
+        </div>
+    </div>
+    <a class="down-arrow" href="#about">
+        <div class="arrow bounce d-none d-md-block">
+            <i class="fas fa-angle-down fa-3x" aria-hidden="true"></i>
+        </div>
+    </a>
+</div>
+<div id="about" class="offset">
+    <div class="os-animation" data-animation="fadeInUp">
+        <div class="narrow text-center">
+            <div class="col-12">
+                <h1 class="mobile-title">Odličen izbor za pravo ceno</h1>
+                <p class="lead">Smo mlada ter visoko motivirana ekipa strokovnjakov s področja avtomobilskega trga, katere je vaše zadovoljstvo
+                    naša prva in edina prioriteta. Z nami doživite pozitivno izkušnjo od prvega kontakta pa do trenutka, ko se končno
+                    vozite v avtu vaših sanj.</p>
+                <a class="btn btn-red btn-sm" href="#cars">Ponudba</a>
+                <a class="btn btn-gray btn-sm" href="#import-and-calculation">Kalkulacija</a>
+            </div>
+        </div>
+    </div>
+    <div class="jumbotron">
+        <div class="narrow">
+            <div class="os-animation" data-animation="fadeInUp">
+                <h3 class="heading">Storitve</h3>
+                <div class="heading-underline"></div>
+            </div>
+            <div class="row">
+                <p class="lead spacing-bottom lead-smaller os-animation justify" data-animation="fadeInUp">
+                    Poslovno smo povezani z leasing hišami pretežno v Nemčiji, kar pomeni da so naša vozila preverjene
+                    kakovosti. Avtomobili so znanega izvora in preverjene celotne servisne zgodovine ter morebitnih popravil.
+                    Direkten kontakt z nemškim trgom nam omogoča hiter dobavni rok, saj lahko večino vozil dostavimo v
+                    roku dneh tednov. Ponujamo vam vozila po najboljši ceni s precej več opreme od vozil, ki so dostopna na našem trgu.
+                    Nudimo tudi nakup novega ali odkup vašega rabljenega vozila.
+                </p>
+                <div class="col-sm-12 col-md-3">
+                    <div class="os-animation" data-animation="fadeInLeft">
+                        <div class="feature">
+                            <span class="fa-layers fa-3x">
+                                <i class="fas fa-truck"></i>
+                            </span>
+                            <h3>Transport</h3>
+                            <p>Transport vozil v sodelovanju z našimi pogodbenimi partnerji.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-3">
+                    <div class="os-animation" data-animation="fadeInUp">
+                        <div class="feature">
+                            <span class="fa-layers fa-3x">
+                               <i class="far fa-handshake"></i>
+                            </span>
+                            <h3>Svetovanje</h3>
+                            <p>Svetovanje pri izbiri, nakupu, uvozu/izvozu, vzdrževanju ter garanciji rabljenih vozil.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-3">
+                    <div class="os-animation" data-animation="fadeInRight">
+                        <div class="feature">
+                            <span class="fa-layers fa-3x">
+                               <i class="fas fa-euro-sign"></i>
+                            </span>
+                            <h3>Financiranje</h3>
+                            <p>Ugodne možnosti financiranja v sodelovanju z našimi pogodbenimi partnerji.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-3">
+                    <div class="os-animation" data-animation="fadeInRight">
+                        <div class="feature">
+                            <span class="fa-layers fa-3x">
+                               <i class="fas fa-tools"></i>
+                            </span>
+                            <h3>Pregled</h3>
+                            <p>Strokoven pregled vozil v pooblaščenih servisih.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="cars" class="offset">
+    <div class="fixed-background">
+        <div class="row light">
+            <div class="col-12 os-animation" data-animation="fadeInUp">
+                <h3 class="heading">Vozila v ponudbi</h3>
+                <div class="heading-underline"></div>
+                <div class="col-md-12">
+                    <div class="os-animation" data-animation="fadeInUp">
+                        <div id="cars-in-offer" class="owl-carousel owl-theme">
+                            <div class="card text-center">
+                                <a href="https://www.avto.net/avtowelt/" target="_blank"><img class="card-img-top" src="img/cars/bmw01.JPEG" alt=""></a>
+                                <div class="card-body">
+                                    <div class="ribbon"><span>NOVO</span></div>
+                                    <h4>BMW serija 4</h4>
+                                    <h5>418d Gran Coupé Sport Line, LED-XENON-NAVI</h5>
+                                    <h5>17.500€</h5>
+                                    <p>BMW Serie 4 418d Gran Coupé Sport Line. Letnik 2015, 104000 KM, v vhhunskem stanju.</p>
+                                </div>
+                            </div>
+                            <div class="card text-center">
+                                <a href="https://www.avto.net/avtowelt/" target="_blank"><img class="card-img-top" src="img/cars/passat011.JPEG" alt=""></a>
+                                <div class="card-body">
+                                    <h4>VW Passat Variant</h4>
+                                    <h5>1.6 TDI Comfortline DSG-NAVI-PANO-KAM-ACC</h5>
+                                    <h5>12.900€</h5>
+                                    <p>VW Passat Comfortline 1.6 TDI odlično ohranjen. Letnik 2015, 159000 KM, veliko dodatne opreme.</p>
+                                </div>
+                            </div>
+                            <div class="card text-center">
+                                <a href="https://www.avto.net/avtowelt/" target="_blank"><img class="card-img-top" src="img/cars/tesla_performance.PNG" alt=""></a>
+                                <div class="card-body">
+                                    <h4>Tesla Model 3</h4>
+                                    <h5>Long Range Performance AWD</h5>
+                                    <h5>58.000€</h5>
+                                    <p>Tesla Model 3, 473KM / 353kW: 283KM / 211kW + 197 / 147 kW. Pogon na vsa štiri kolesa, doseg 530km.</p>
+                                </div>
+                            </div>
+                            <div class="card text-center">
+                                <a href="https://www.avto.net/avtowelt/" target="_blank"><img class="card-img-top" src="img/cars/tesla_lr.PNG" alt=""></a>
+                                <div class="card-body">
+                                    <h4>Tesla Model 3</h4>
+                                    <h5>Long Range AWD</h5>
+                                    <h5>53.900€</h5>
+                                    <p>Tesla Model 3, 412KM / 307kW: 252KM / 188kW + 197 / 147 kW. Pogon na vsa štiri kolesa, doseg 560km.</p>
+                                </div>
+                            </div>
+                            <div class="card text-center">
+                                <a href="https://www.avto.net/avtowelt/" target="_blank"><img class="card-img-top" src="img/cars/tesla_lr.PNG" alt=""></a>
+                                <div class="card-body">
+                                    <h4>Tesla Model 3</h4>
+                                    <h5>Standard Range Plus RWD</h5>
+                                    <h5>45.700€</h5>
+                                    <p>Tesla Model 3, 283KM / 211kW, pogon na zadnji kolesi. Doseg 409km, najvišja hitrost: 225km/h.</p>
+                                </div>
+                            </div>
+                            <div class="card text-center">
+                                <a href="https://www.avto.net/avtowelt/" target="_blank"><img class="card-img-top" src="img/cars/passat01.JPEG" alt=""></a>
+                                <div class="card-body">
+                                    <h4>VW Passat Variant</h4>
+                                    <h5>2.0 TDI Highline 150KM</h5>
+                                    <h5>15.450€</h5>
+                                    <p> VW Passat Highline 2.0 TDI odlično ohranjen. Letnik 2015, 142516 KM, Nemškega porekla.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fixed-wrap">
+            <div id="fixed-2">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="import-and-calculation" class="offset">
+    <div class="narrow">
+        <div class="col-12 os-animation" data-animation="fadeInUp">
+            <h3 class="heading">Uvoz</h3>
+            <div class="heading-underline"></div>
+        </div>
+        <div class="os-animation" data-animation="fadeInLeft">
+            <blockquote class="blockquote">
+                <p class="mb-0">Uvoz vozil po naročilu že od 490€ + DDV.</p>
+            </blockquote>
+            <p class="justify">Željeno vozilo najprej preverimo. Vseskozi vam svetujemo, od prevoza do same registracije.  V skladu z vašimi željami vam pripravimo predračun, ki vključuje vse stroške prevoza, DMV in DDV.
+               Cene se razlikujejo glede na stopnjo DMV ter lokacijo vozila. Vozilo nato v celoti plačate po predračunu ali vam pomagamo pri ureditvi financiranja - leasing ali
+               kredit.</p>
+            <p>
+                <span class="text-red">Postopek:</span>
+                <li> Izbira vozila na internetu pri enem izmed trgovcev</li>
+                <li> Svetovanje ter preverba vozila</li>
+                <li> Urejanje potrebne dokumentacije</li>
+                <li> DMV in homologacija</li>
+                <li> Morebitna ličarska dela in/ali poliranje - doplačilo</li>
+                <li> Morebitno notranje globinsko čiščenje vozila - doplačilo</li>
+            </p>
+            <button class="btn btn-gray-costs" style="cursor: pointer" id="accordion" data-toggle="collapse" data-target="#calculation" aria-expanded="true" aria-controls="collapseOne">Izračun stroškov</button>
+        </div>
+        <div id="calculation" class="collapse hide " aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="row">
+                <div class="col-md-6">
+                    <form>
+                        <div class="row">
+                            <label for="price" class="col-sm-3 align-self-center">Cena vozila</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" v-bind:class="{ 'is-invalid': carPrice }" id="price" v-model="price" aria-describedby="emailHelp" title="vpišite ceno vozila v evrih" placeholder="Davčna osnova" required>
+                                <div class="invalid-feedback">
+                                    Vpišite ceno vozila
+                                </div>
+                            </div>
+                        </div>
+                        <fieldset class="row">
+                            <div class="row">
+                                <legend class="col-form-label col-sm-3">Tip cene</legend>
+                                <div class="col-sm-9">
+                                    <div class="custom-control custom-switch" id="test1">
+                                        <input type="checkbox" class="custom-control-input" id="grossnett" v-model="priceType">
+                                        <label class="custom-control-label" for="grossnett">
+                                            <span v-if="priceType" class="choosen">Bruto</span>
+                                            <span v-else class="choosen">Neto</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="row">
+                            <div class="col-sm-3 align-self-center">Gorivo</div>
+                            <div class="col-sm-9">
+                                <select class="custom-select" id="selectBox1" v-bind:class="{ 'is-invalid': carFuel }" v-model="fuel" title="izberite tip goriva" required>
+                                    <option value="dizel">Dizel</option>
+                                    <option value="elektrika">Elektrika</option>
+                                    <option value="ostalo">Benzin(+vse ostalo)</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Izberite tip goriva
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row zero-margin">
+                            <div class="col-sm-3 align-self-center pad">Prostornina</div>
+                            <div class="col-sm-9">
+                                <select class="custom-select" id="selectBox2" v-bind:class="{ 'is-invalid': carCCM }" v-model="ccm" title="izberite razred prostornine motorja" required>
+                                    <option value="1">do 2499</option>
+                                    <option value="2">od 2500 do 2999</option>
+                                    <option value="3">od 3000 do 3499</option>
+                                    <option value="4">od 3500 do 3999</option>
+                                    <option value="5">nad 4000</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Izberite razred prostornine
+                                </div>
+                            </div>
+                        </div>
+                        <fieldset>
+                            <div class="row">
+                                <legend class="col-form-label col-sm-3">Trdi delci <i class="fas fa-info-circle" data-toggle="diesel-info" title="Emisija trdih delcev v g/km (samo za dizel)"></i></legend>
+                                <div class="col-sm-9">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="trdidelci" v-model="dizelTrdiDelci">
+                                        <label class="custom-control-label" for="trdidelci">Izpust trdih delcev nad 0,005 g/km</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="row">
+                            <div class="col-sm-3 align-self-center">EURO motor</div>
+                            <div class="col-sm-9">
+                                <select class="custom-select" id="selectBox3" v-bind:class="{ 'is-invalid': carEURO }" v-model="euroEngine" title="izberite tip EURO standarda motorja" required>
+                                    <option value="euro1">EURO 1</option>
+                                    <option value="euro2">EURO 2</option>
+                                    <option value="euro3">EURO 3</option>
+                                    <option value="euro4">EURO 4</option>
+                                    <option value="euro5">EURO 5</option>
+                                    <option value="euro6">EURO 6</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Izberite EURO standard motorja
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 align-self-center">Emisije CO2</div>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="emission" aria-describedby="emailHelp" placeholder="0" v-bind:class="{ 'is-invalid': carCO2 }" v-model="co2" required>
+                                <div class="invalid-feedback">
+                                    Vpišite emisije CO2
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 align-self-center pad-2">Transport</div>
+                            <div class="col-sm-9">
+                                <select class="custom-select" id="selectBox4" v-model="location" title="izberite približno lokacijo transporta" required>
+                                    <optgroup label="Nemčija" data-max-options="1">
+                                        <option value="0">München</option>
+                                        <option value="1">Frankfurt, Nürnberg, Saarbrucken</option>
+                                        <option value="2">Köln, Dortmund, Kassel</option>
+                                        <option value="3">Munster</option>
+                                        <option value="4">Leipzig</option>
+                                        <option value="5">Hannover</option>
+                                        <option value="6">Berlin, Hamburg, Bremen</option>
+                                        <option value="7">Flensburg</option>
+                                    </optgroup>
+                                    <optgroup label="Belgija" data-max-options="1">
+                                        <option value="8">Celotna država</option>
+                                    </optgroup>
+                                    <optgroup label="Nizozemska" data-max-options="1">
+                                        <option value="9" >Rotterdam + Amsterdam</option>
+                                        <option value="10">Groningen</option>
+                                        <option value="11">Ostale destinacie v NL</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                    <transition name="fade">
+                        <div class="alert alert-secondary" role="alert" v-show="show" style="animation-duration: 1s">
+                            <h4 class="alert-heading">Izračun:</h4>
+                            <p>
+                                Stopnja Davka: {{ stopnjaDavka }}%<br>
+                                Znesek davka: {{ znesekDavka }}€<br>
+                                Stopnja pribitka: {{ stopnjaPribitka }}%<br>
+                                Znesek pribitka: {{ znesekPribitka }}€<br>
+                                Strošek transporta: {{ transportCosts }}€ + DDV<br>
+                                Homologacija: {{ homologacija }}€<br>
+                                Ostali stroški: {{ otherExpenses }}€
+                            </p>
+                            <hr>
+                            <p class="mb-0">
+                                Končni znesek vozila z davkom in transportom: <b>{{ skupajDavek }}€</b><br><br>
+                                <span class="font-weight-light">Končna cena vključuje DMV, DDV, homologacijo, vse stroške uvoza in transporta<i class="fas fa-info-circle" data-toggle="transport-info" title="Izračun je informativen in velja v primeru plačila vozila po predračunu."></i></span>
+                            </p>
+                        </div>
+                    </transition>
+                    <button class="btn btn-calculate" @click="calculate()">Izračunaj</button>
+                </div>
+                <div class="col-md-6">
+                    Davek na motorna vozila - DMV<br>
+                    <a class="modal-title" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Preberi več...
+                    </a>
+                    <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <p>Osnova za davek je prodajna cena posameznega motornega vozila, ki ne vključuje tega davka in davka na
+                                dodano vrednost. Kot prodajna cena se pri pridobitvi motornega vozila iz druge države članice Evropske
+                                unije šteje nakupna cena.</p>
+                            <p>Če motorno vozilo iz prejšnjega odstavka uporablja kateri koli drug pogon, vključno z električnim, ali
+                                kombinacijo različnih pogonov (hibridno vozilo), se stopnja davka določi z upoštevanjem lestvice, ki velja
+                                za vozila z bencinskim gorivom.</p>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1.5rem">
+                        Kdaj izbrati <span class="text-red">neto</span> ceno?<br>
+                    <li>kupec je pravna oseba zavezanec za DDV</li>
+                    <li>kupec je fizična oseba, ki financira vozilo preko Banke / leasinga</li>
+                    <li>vozilo je mlajše od 6 mesecev</li>
+                    <li>vozilo ima prevoženih manj kot 6.000 km</li>
+                    <br><br>
+                    Kdaj izbrati <span class="text-red">bruto</span> ceno?<br>
+                    <li>kupec je fizična oseba, ki plačuje po predračunu</li>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="contact" class="offset">
+    <footer>
+        <div class="row">
+            <div class="col-md-5">
+                <img src="img/logo2-transparent.png" alt="">
+                <p>AVTO WELT d.o.o.<br>Premium selection &amp; Fair price</p>
+                <strong>Naslov</strong>
+                <p>Vanganelska cesta 5,<br>6000 Koper</p>
+                <strong>Kontakt</strong>
+                <p>Tadej Perhavec</p>
+                <p>
+                    +386 41 743 217<br>
+                    tadej@avtowelt.com<br>
+                    matjaz@avtowelt.com<br>
+                </p>
+                <a href="http://bit.ly/avtowelt" target="_blank"><i class="fas fa-map-marked-alt fa-2x"></i></a>
+                <a href="#"><i class="fab fa-facebook-square fa-2x"></i></a>
+            </div>
+            <div class="col-md-7">
+                <h3 class="h3-contact">Kontakt</h3>
+                <form id="email" action="">
+                    <div class="col-md-8 mb-2 form-group">
+                        <label for="name-surname">Ime in priimek</label>
+                        <input type="text" class="form-control" id="name-surname"  v-bind:class="{ 'is-invalid': nameSurnameValid }" name="fullname" aria-describedby="emailHelp" placeholder="Ime in priimek" v-model="fullname" required>
+                        <div class="invalid-feedback">
+                            Vpišite ime in priimek
+                        </div>
+                    </div>
+                    <div class="col-md-8 mb-2 form-group">
+                        <label for="email-label">Email</label>
+                        <input type="email" class="form-control" id="email-label" v-bind:class="{ 'is-invalid': emailValid }" name="email" aria-describedby="emailHelp" placeholder="Email" v-model="email" required>
+                        <div class="invalid-feedback">
+                            Vpišite email naslov
+                        </div>
+                    </div>
+                    <div class="col-md-8 mb-2 form-group">
+                        <label for="textarea">Sporočilo</label>
+                        <textarea class="form-control" id="textarea" v-bind:class="{ 'is-invalid': messageValid }" name="message" rows="3" placeholder="Sporočilo" v-model="message" required></textarea>
+                        <div class="invalid-feedback">
+                            Vpišite sporočilo
+                        </div>
+                    </div>
+                    <div class="col-md-8 mb-2 form-group">
+                        <div id="status-message"></div>
+                    </div>
+                    <button type="submit" class="btn btn-calculate" id="send-email" @click="validate()">Pošlji</button>
+                </form>
+            </div>
+            <a href="#home"><i class="far fa-arrow-alt-circle-up fa-2x scroller"></i></a>
+            <hr class="socket">
+            &copy; AVTO WELT d.o.o.
+        </div>
+    </footer>
+</div>
+</body>
+</html>
+<script>
+
+    var validate = new Vue({
+       el: '#email',
+       data() {
+           return {
+               message: '', email: '', fullname: '',
+               nameSurnameValid: '', emailValid:'', messageValid: ''
+           }
+       },
+       methods: {
+           validate: function() {
+            this.nameSurnameValid = this.fullname === '';
+            this.emailValid = this.email === '';
+            this.messageValid = this.message === '';
+           }
+       }
+    });
+
+    var calc = new Vue({
+        el: '#calculation',
+        data(){
+            return {
+                priceGross:0, priceNett: 0, provision: 490, otherExpenses: 100, homologacija: 102,
+                price: 0, endPrice: 0,
+                fuel: '',
+                euroEngine: 0,
+                co2: 0,
+                show: false,
+                emission:0, emissionPoints: 1,
+                fuelPoints: 0,
+                ccm: 0, ccmPoints: 0,
+                location: 0, transportCosts: 0,
+                dizelTrdiDelci: false, priceType: false,
+                step1: 0, step2:0, step3: 0,
+                emissionBenzin: 0, emissionDizel:0,
+                carPrice: 0, carFuel: '', carCCM: '', carEURO: '', carCO2: '',
+                stopnjaDavka: 0, stopnjaPribitka: 0, znesekPribitka: 0, skupajDavek: 0, znesekDavka: 0
+            }
+        },
+        methods: {
+            calculate: function () {
+
+                var costs = [240, 260, 280, 320, 320, 330, 350, 400, 300, 350, 400, 430 ];
+                this.transportCosts = costs[this.location];
+
+                if(this.fuel === 'elektrika') {
+                    fuelPoints = 1;
+                } else if (this.fuel === 'dizel') {
+                    fuelPoints = 2;
+                } else {
+                    fuelPoints = 3
+                }
+
+                if (this.euroEngine === 'euro1') {
+                    emissionPoints = 10;
+                } else if (this.euroEngine === 'euro2') {
+                    emissionPoints = 10;
+                } else if (this.euroEngine === 'euro3') {
+                    emissionPoints = 5;
+                } else if (this.euroEngine === 'euro4') {
+                    emissionPoints = 2;
+                } else if (this.euroEngine === 'euro5') {
+                    emissionPoints = 0;
+                } else {
+                    emissionPoints = 0;
+                }
+
+                if (this.ccm === '1') {
+                    ccmPoints = 0;
+                } else if (this.ccm === '2') {
+                    ccmPoints = 8;
+                } else if (this.ccm === '3') {
+                    ccmPoints = 10;
+                } else if (this.ccm === '4') {
+                    ccmPoints = 13;
+                } else {
+                    ccmPoints = 16;
+                }
+
+                if (this.fuel === 'dizel' && this.dizelTrdiDelci === true) {
+                    this.dizelTrdiDelci = 5;
+                } else {
+                    this.dizelTrdiDelci = 0;
+                }
+
+                if (this.fuel === 'elektrika') {
+                    this.co2 = 0;
+                }
+
+                if (this.co2 >= 0 && this.co2 < 110.1) {
+                    emissionBenzin = 0.5;
+                    emissionDizel = 1
+                } else if(this.co2 > 110.1 && this.co2 < 120.01) {
+                    emissionBenzin = 1;
+                    emissionDizel = 2;
+                } else if (this.co2 > 120.01 && this.co2 < 130.01) {
+                    emissionBenzin = 1.5;
+                    emissionDizel = 3
+                } else if (this.co2 > 130.01 && this.co2 < 150.01) {
+                    emissionBenzin = 3;
+                    emissionDizel = 6
+                } else if (this.co2 > 150.01 && this.co2 < 170.01) {
+                    emissionBenzin = 6;
+                    emissionDizel = 11
+                } else if (this.co2 > 170.01 && this.co2 < 190.01) {
+                    emissionBenzin = 9;
+                    emissionDizel = 15
+                } else if (this.co2 > 190.01 && this.co2 < 210.01) {
+                    emissionBenzin = 13;
+                    emissionDizel = 18;
+                } else if (this.co2 > 210.01 && this.co2 < 230.1) {
+                    emissionBenzin = 18;
+                    emissionDizel = 22;
+                } else if (this.co2 > 230.01 && this.co2 < 250.01) {
+                    emissionBenzin = 23;
+                    emissionDizel = 26;
+                } else {
+                    emissionBenzin = 28;
+                    emissionDizel = 31;
+                }
+
+                if(this.fuel === 'ostalo'){
+                    step1 = true;
+                } else if (this.fuel === 'dizel' && this.euroEngine === 'euro6') {
+                    step1 = true;
+                } else step1 = this.fuel === 'elektrika';
+
+                step2 = step1 === true ? emissionBenzin : emissionDizel;
+
+                if (this.fuel === 'elektrika') {
+                    step3 = step2;
+                } else {
+                    step3 = step2 + emissionPoints;
+                }
+
+                this.endPrice = this.price;
+                if (this.priceType === false) {
+                    this.endPrice = Math.round((parseInt(this.price) * 0.22) + parseInt(this.price),0);
+                }
+
+                this.stopnjaDavka = step3 + this.dizelTrdiDelci;
+                this.znesekDavka = Math.round((this.stopnjaDavka / 100) * this.endPrice, 0);
+                this.stopnjaPribitka = ccmPoints;
+                this.znesekPribitka = Math.round(this.endPrice * (this.stopnjaPribitka / 100), 0);
+                this.skupajDavek = parseInt(this.endPrice) + this.znesekDavka + this.znesekPribitka + this.transportCosts + this.provision + this.homologacija + this.otherExpenses;
+
+                this.carPrice = this.price === 0;
+                this.carFuel = this.fuel === '';
+                this.carCCM = this.ccm === 0;
+                this.carEURO = this.euroEngine === 0;
+                this.carCO2 = this.fuel !== 'elektrika' && this.co2 === 0;
+                this.show = this.carPrice === false && this.carFuel === false && this.carCCM === false && this.carEURO === false && this.carCO2 === false;
+            }
+        }
+    })
+
+</script>
