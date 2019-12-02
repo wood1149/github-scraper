@@ -1,8 +1,8 @@
-from regex_matching_strings import match_api_key as MatchAPI
-from regex_matching_strings import match_password as MatchPW
-from regex_matching_strings import match_crypto as MatchCrypto
-from regex_matching_strings import match_bitcoin as MatchBitcion 
-from regex_matching_strings import match_email as MatchEmail
+from .regex_matching_strings import match_api_key as MatchAPI
+from .regex_matching_strings import match_password as MatchPW
+from .regex_matching_strings import match_crypto as MatchCrypto
+from .regex_matching_strings import match_bitcoin as MatchBitcion 
+from .regex_matching_strings import match_email as MatchEmail
 
 gfilestr = ""
 #takes in a map, runs regex matching on text, and returns type/line number of match
@@ -24,7 +24,6 @@ def getLine(filestr=gfilestr):
       prevnl = nextnl
 
 def findMatches(key,fileString,outputMap):
-    print("finding matches")
     idx = 1
     for line in getLine(fileString):
       if(MatchAPI(line)):
@@ -38,7 +37,7 @@ def findMatches(key,fileString,outputMap):
       if(MatchEmail(line)):
         outputMap[key] = ["Email:" + str(idx)]
 
-        idx +=1
+      idx +=1
             
 
 if __name__ == '__main__':

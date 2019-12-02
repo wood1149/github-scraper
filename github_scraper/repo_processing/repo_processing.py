@@ -24,7 +24,7 @@ def get_user_repos(username):
     url = f'{BASE_URL}/users/{username}/repos'
 
     try:
-        response = requests.get(url, headers=HEADERS)
+        response = requests.get(url)
         response.raise_for_status()
     except requests.HTTPError as e:
         sys.exit(e)
@@ -82,7 +82,7 @@ def get_repo_files(username, repo_name, path=''):
             file_ext = file_path.split(".")[-1]
             if file_ext in SCRAPABLE_EXTENSIONS and not any(dir in file_path for dir in DIRECTORIES_TO_AVOID):
                 download_url = f'https://raw.githubusercontent.com/{username}/{repo_name}/master/{file_path}'
-                content = requests.get(download_url, headers=HEADERS).text
+                content = requests.get(download_url).text
                 file_key = repo_name + '/' + file_path
                 repo_files[file_key] = content
 

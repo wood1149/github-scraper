@@ -2,6 +2,8 @@
 import argparse
 
 from repo_processing import repo_processing as RepoProcessing
+from regex_matching.main_control import main as find_vulnerabilities
+from utilities import display_results, save_results
 
 # Hardcoded strings, maybe replace with configuration file
 desc = ''
@@ -28,6 +30,8 @@ def setup_argparse():
         print(f'Scraping {args.repo} repository')
         repo_files = RepoProcessing.get_repo_files(args.username, args.repo)
         print("Recieved files from " +str(args.username) +"/"+ str(args.repo))
+        v = find_vulnerabilities(repo_files)
+        display_results(v)
     else:
         repo_names = RepoProcessing.get_user_repos(args.username)
         print(repo_names)
