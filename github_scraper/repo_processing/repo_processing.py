@@ -9,7 +9,7 @@ HEADERS = {'Authorization': f'token {api_token}'}
 # Used so script ignores binary files
 # We could do another way later if we don't want to list out all extensions we want
 SCRAPABLE_EXTENSIONS = {'cpp', 'txt', 'py', 'config', 'c', 'js', 'html'}
-DIRECTORIES_TO_AVOID = {'node_modules', 'env', 'github_site_data', 'username_data'}
+DIRECTORIES_TO_AVOID = {'node_modules', 'env', 'github_site_data', 'username_data', 'js'}
 
 def get_user_repos(username):
     """Gets list of public repositories owned by a particular user
@@ -75,7 +75,12 @@ def get_repo_files(username, repo_name, path=''):
         sys.exit(e)
 
     repo_files = {}
-    tree = res['tree']
+
+    try:
+        tree = res['tree']
+    except KeyError as e:
+        print(res)
+        sys.exit(e)
     for t in tree:
         if t['type'] == 'blob':
             file_path = t['path']
