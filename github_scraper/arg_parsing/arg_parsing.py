@@ -30,7 +30,8 @@ def setup_argparse():
         repo_files = RepoProcessing.get_repo_files(args.username, args.repo)
         print("Recieved files from " +str(args.username) +"/"+ str(args.repo))
         v = find_vulnerabilities(repo_files)
-        display_results(v)
+        print(v)
+        #display_results(v)
     else:
         print(f'Scraping repositories for user {args.username}')
         repo_names = RepoProcessing.get_user_repos(args.username)
