@@ -2,12 +2,12 @@
 Searches predefined list of GitHub Users' repositories and GitHub.io pages for sensitive or personal information.
 
 
-##Overview
+## Overview
 This python package primarily deals with finding sensitive data on public github repositories. This senstive info includes password, API keys, crypto (AES, RSA) keys, and cryptocurrency keys.
 
 The first step of scraping is to gather a list of usernames. This functionality detailed in the **Scrape Usernames** section below. This is the only section using Javascript, due to a dependency. The rest of the python library will reference this username list created in ./usernames
 
-**Main Functionality**
+**Main Functionality:**
     
 See the demo file in the root directory for examples.
 This gitub_scraper module will run the main functionality of finding vulnerable files.
@@ -21,7 +21,8 @@ python3 github_scraper -h
 
 
 
-**Extra Features**
+**Extra Features:**
+
 Also included in the "github_site_tools" module there is the ability to scrape github sites found in "github_site_data"
 
 '''python
