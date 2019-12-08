@@ -8,7 +8,6 @@ import os
 import shutil
 import re
 
-datapath = "./../.."
 
 # this is not an exhaustive list of functions, will need to add to/refactor architecture of module depending on how we want to implement file access and reading
 
@@ -17,7 +16,7 @@ def readInUsernames():
     usernames = set()
 
     #walk through username directory
-    for file in glob.glob(datapath+"/username_data/*.txt"):
+    for file in glob.glob("./username_data/*.txt"):
         #print("reading " + str(file))
         with open(file,"r") as datafile:
             for user in datafile:
@@ -25,14 +24,14 @@ def readInUsernames():
                 user = user.strip()
                 usernames.add(user)
 
-    print("found " + str(len(usernames)) + " usernames from " + datapath+"/username_data")
+    print("found " + str(len(usernames)) + " usernames from " + "/username_data")
     return usernames
 
 def getAlreadyScrapedUsers():
     getUsername = re.compile(r'data/(\S+)\_(GithubSiteHTML|INVALID)')
     usernames = set()
     #walk through username directory
-    for file in glob.glob(datapath+"/github_site_data/*.html"):
+    for file in glob.glob("./github_site_data/*.html"):
         #if("invalid" not in file.lower()):
         regsearch = getUsername.search(file)
         if(regsearch != None):
@@ -41,12 +40,12 @@ def getAlreadyScrapedUsers():
     return usernames
 def fixFilenames():
     #walk through username directory
-    for file in glob.glob(datapath+"/github_site_data/*.html"):
+    for file in glob.glob("./github_site_data/*.html"):
 
         if("\\n" in file or "\n" in file):
             print(r""+file)
             file2 = file.split("/")[2].replace('\\n','')
-            shutil.move(file,datapath+"/github_site_data/"+file2)
+            shutil.move(file,"./github_site_data/"+file2)
 
 def requestIOSite(username):
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
@@ -68,10 +67,11 @@ def requestIOSite(username):
         print("\t(res): " + str(response.status_code))
         return False
 
-if __name__ == '__main__':
-    #fixFilenames()
-    #exit(1)
+def main():
     errorcount =0
+    print("Scraping data from..")
+
+    print(os.getcwd())
     userSet = readInUsernames()
     listOfUsernames = getAlreadyScrapedUsers()
 
@@ -105,12 +105,16 @@ if __name__ == '__main__':
                 exit(1)
         elif(res!= False):
             #writes html to file
-            with open(datapath+"/github_site_data/"+user+"_GithubSiteHTML.html","w+") as outfile:
+            with open("./github_site_data/"+user+"_GithubSiteHTML.html","w+") as outfile:
                 outfile.write(res)
         else:
-            with open(datapath+"/github_site_data/"+user+"_INVALID.html","w+") as outfile:
+            with open("./github_site_data/"+user+"_INVALID.html","w+") as outfile:
                 outfile.write("no data")
 
 
     print("done")
+if __name__ == '__main__':
+    
+    main()
+    
 
