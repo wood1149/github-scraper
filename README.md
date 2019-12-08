@@ -19,11 +19,11 @@ The first step of identifying secrets is to gather a list of usernames. This fun
     
 See the demo file in the root directory for examples.
 This gitub_scraper module will run the main functionality of finding vulnerable files.
-THe output will be the secrets found by the scraper as well as the line numbers
+The output will be the secrets found by the scraper as well as the line numbers
 
-Also
+Commandline usage
 
-```
+```python
 python3 github_scraper -h
 ```
 
@@ -33,30 +33,30 @@ python3 github_scraper -h
 
 Also included in the "github_site_tools" module there is the ability to scrape github sites found in "github_site_data"
 
-'''python
+```python
     from github_scraper.github_site_tools import scrape_githubIO_sites as SGIO
     #This will save site data to the top level directory
     SGIO.main() 
-'''
+```
 
 Then
-'''python
+```python
     from github_scraper.github_site_tools import get_user_emails as GE
     #This will save site data to the top level directory (./emails.json)
     GE.main() 
-'''
+```
 
 This will extact emails from these github sites. Currently only emails are supported for github sites
 
 
 
 ## Scrape Usernames:
-    ```javascript
+```
     npm install
     node scrapeUsers.js
-    ```
+```
 
-Edit the scrapeUsers file to pick what user will be scraped for their usernames.
+Run the scrapeUsers.js file to pick what user will be scraped for their usernames.
 
 This tool will allow the user to scrape many ussernames from github. Please input a user with many followers, and the tool will output their followers, up to a maximum.
 
@@ -66,7 +66,7 @@ Features in scrapeUsers.js:
     "operation" 0 to scrape a users followers
     "operation" 1 to scrape followers of a user (the user must have been scraped by operation 0 first)
 
-    Use the CLI prompts for the easiest use
+> Use the CLI prompts of scrapeUsers.js for the easiest use
 
 
 
