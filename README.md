@@ -5,7 +5,15 @@ Searches predefined list of GitHub Users' repositories and GitHub.io pages for s
 ## Overview
 This python package primarily deals with finding sensitive data on public github repositories. This senstive info includes password, API keys, crypto (AES, RSA) keys, and cryptocurrency keys.
 
-The first step of scraping is to gather a list of usernames. This functionality detailed in the **Scrape Usernames** section below. This is the only section using Javascript, due to a dependency. The rest of the python library will reference this username list created in ./usernames
+**Single User**
+
+This tool was made to scrape a single user's repository for accidental secrets exposed. This can be run via commandline or script (see the demo script in the top level directory or see the **Main Functionality** section below for commandline usage)
+
+**Group Data Collection**
+
+This tool also functions as a way to anlyaze a list of usernames for secrets in github files
+
+The first step of identifying secrets is to gather a list of usernames. This functionality detailed in the **Scrape Usernames** section below. This is the only section using Javascript, due to a dependency. The rest of the python library will reference this username list created in ./usernames
 
 **Main Functionality:**
     
