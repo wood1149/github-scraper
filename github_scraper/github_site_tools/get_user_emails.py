@@ -57,6 +57,7 @@ def main():
     print("Scraping data from..")
     print(os.getcwd())
     get_user_emails()
+    print("Find output in emails.json")
 
 if __name__ == '__main__':
     main()
