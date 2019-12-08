@@ -24,7 +24,7 @@ The output will be the secrets found by the scraper as well as the line numbers
 Commandline usage
 
 ```python
-python3 github_scraper -h
+    python3 github_scraper -h
 ```
 
 
