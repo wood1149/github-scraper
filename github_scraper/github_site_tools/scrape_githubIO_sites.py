@@ -70,7 +70,6 @@ def requestIOSite(username):
 def main():
     errorcount =0
     print("Scraping data from..")
-
     print(os.getcwd())
     userSet = readInUsernames()
     listOfUsernames = getAlreadyScrapedUsers()
