@@ -6,7 +6,7 @@ import re
 import os
 
 
-def get_user_emails(site_dir='./../../github_site_data'):
+def get_user_emails(site_dir='./github_site_data'):
     """ Obtains a list of user emails and then dumps them
         into a JSON file.
 
@@ -53,5 +53,11 @@ def get_user_emails(site_dir='./../../github_site_data'):
     with open(json_path, 'w') as json_write_file:
         json.dump(json_obj, json_write_file)
         json_write_file.close()
+def main():
+    print("Scraping data from..")
+    print(os.getcwd())
+    get_user_emails()
+    print("Find output in emails.json")
 
-get_user_emails()
+if __name__ == '__main__':
+    main()

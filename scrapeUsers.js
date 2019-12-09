@@ -8,7 +8,6 @@ Github Scraper
 This file will gather necessary usernames and repos
 */
 
-//EDIT THESE
 //0, scrape from user
 //1, scrape user followers
 let operation; //0
@@ -29,7 +28,7 @@ const fs = require("fs");
 
 
 
-
+//sets up user interface
 const readline = require('readline').createInterface({
   input: process.stdin,
   output: process.stdout
@@ -67,8 +66,10 @@ readline.on("close", function() {
     originalUser = usernameToScrape
 
     if(operation === 0){
+        //get followers of a user
         intervalGet();
     }else if(operation === 1){
+        //get followers of followers
         getFollowersOfFollowers();
     }
 });
@@ -111,7 +112,7 @@ const getOnePage = url => {
     
 };
 
-
+//sees if user has been scraped already or not
 const hasUserBeenScraped = username =>{
     let res = false
     if(!seenUnamesThisRun.has(username))
