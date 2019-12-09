@@ -34,7 +34,7 @@ for f in os.listdir(username_dir):
                         data[v_type] += 1
 
             print(data)
-            print('Username count: ' + count)
+            print(f'Username count: {count}')
 
             if (count == 2):
                 break
