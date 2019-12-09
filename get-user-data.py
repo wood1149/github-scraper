@@ -5,40 +5,41 @@ from collections import defaultdict
 import os
 
 
-
+api_token = ''
+#headers = {'Authorization': f'token {api_token}'}
+headers = {}
 
 username_path = 'username_data'
-
 username_dir = os.fsencode(username_path)
 
+data = defaultdict(int)
 count = 0
 
 for f in os.listdir(username_dir):
     file_path = username_path + '/' + os.fsdecode(f)
     with open(file_path, 'r') as read_file:
         for line in read_file:
+            username = line.strip()
             count += 1
-            print(line, end='')
 
-print(count)
-exit()
+            print(f'Getting all files for user {username}')
+            repo_files = RepoProcessing.get_all_files_for_user(username, headers)
+            print(f'Recieved all files from {username}')
+            results = find_vulnerabilities(repo_files)
 
-username = 'daphneehuang'
-repo = 'cse4471-demo'
+            for file, v_list in results.items():
+                if  v_list:
+                    for v in v_list:
+                        v_type, _, line = v.partition(':')
+                        data[v_type] += 1
 
+            print(data)
+            print(f'Username count: {count}')
 
-print(f'Scraping {repo} repository')
-repo_files = RepoProcessing.get_repo_files(username, repo)
-print("Recieved files from " +str(username) +"/"+ str(repo))
-results = find_vulnerabilities(repo_files)
+            if (count == 2):
+                break
+    if (count == 2):
+        break
 
-
-data = defaultdict(int)
-
-for file, v_list in results.items():
-    if  v_list:
-        for v in v_list:
-            v_type, _, line = v.partition(':')
-            data[v_type] += 1
 
 print(data)
