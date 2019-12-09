@@ -24,6 +24,23 @@ def setup_argparse():
     vuln_group.add_argument('-c', '--crypto', help='Look for cryptographic keys', action='store_true')
     args = parser.parse_args()
     
+
+    
+
+    if args.api or args.password or args.email or args.bitcoin or args.crypto:
+        types = set()
+        if args.api:
+            types.add('API')
+        if args.password:
+            types.add('Password')
+        if args.email:
+            types.add('Email')
+        if args.crypto:
+            types.add('Crypto')
+    else:
+        types = {'API', 'Password', 'Email', 'Crypto'}
+    
+
     if args.repo:
         # Repo name provided
         print(f'Scraping {args.repo} repository')
@@ -31,7 +48,7 @@ def setup_argparse():
         print("Recieved files from " +str(args.username) +"/"+ str(args.repo))
         v = find_vulnerabilities(repo_files)
         print(v)
-        #display_results(v)
+        display_results(v, types)
     else:
         print(f'Scraping repositories for user {args.username}')
         repo_names = RepoProcessing.get_user_repos(args.username)
