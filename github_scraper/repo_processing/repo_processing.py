@@ -49,7 +49,6 @@ def get_repo_files(username, repo_name, headers={}):
 
     try:
         response = requests.get(url, headers=headers)
-
         res = response.json()
     except requests.HTTPError as e:
         print(e)
@@ -60,7 +59,7 @@ def get_repo_files(username, repo_name, headers={}):
     try:
         tree = res['tree']
     except KeyError as e:
-        print(e)
+        print('KeyError from Github Tree request')
         return {}
 
     for t in tree:

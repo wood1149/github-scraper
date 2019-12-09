@@ -33,6 +33,9 @@ for f in os.listdir(username_dir):
                         v_type, _, line = v.partition(':')
                         data[v_type] += 1
 
+            print(data)
+            print('Username count: ' + count)
+
             if (count == 2):
                 break
     if (count == 2):
