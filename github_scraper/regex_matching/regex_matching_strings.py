@@ -99,18 +99,18 @@ def match_api_key(line):
     AWSsecretAccessKeyAlternative = re.compile(r'[0-9a-zA-Z/+]{40}')
     #https://people.eecs.berkeley.edu/~rohanpadhye/files/key_leaks-msr15.pdf
     #Bitly
-    BITsecretAccessKey = re.compile(r'R_[0-9a-f]{32}')
+    BITsecretAccessKey = re.compile(r'R_[0-9a-f]{32,}')
     #Facebook
-    FBsecretAccessKey = re.compile(r'[0-9a-f]{32}')
+    FBsecretAccessKey = re.compile(r'[0-9a-f]{32,}')
 
     #FLICKR
-    FLsecretAccessKey = re.compile(r'[0-9a-f]{16}')
+    FLsecretAccessKey = re.compile(r'[0-9a-f]{16,}')
 
     #Foursquare
-    FSsecretAccessKey = re.compile(r'[0-9A-Z]{48}')
+    FSsecretAccessKey = re.compile(r'[0-9A-Z]{48,}')
 
     #LinkedIn
-    LIsecretAccessKey = re.compile(r'[0-9a-zA-Z]{16}')
+    LIsecretAccessKey = re.compile(r'[0-9a-zA-Z]{16,}')
 
     #Twitter
     TWsecretAccessKey = re.compile(r'[0-9a-zA-Z]{35,44}')
