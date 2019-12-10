@@ -25,8 +25,6 @@ def setup_argparse():
     args = parser.parse_args()
     
 
-    
-
     if args.api or args.password or args.email or args.bitcoin or args.crypto:
         types = set()
         if args.api:
@@ -47,9 +45,26 @@ def setup_argparse():
         repo_files = RepoProcessing.get_repo_files(args.username, args.repo)
         print("Recieved files from " +str(args.username) +"/"+ str(args.repo))
         v = find_vulnerabilities(repo_files)
-        print(v)
         display_results(v, types)
     else:
         print(f'Scraping repositories for user {args.username}')
         repo_names = RepoProcessing.get_user_repos(args.username)
-        print(repo_names)
+        print('Repository names:')
+        for i in range(len(repo_names)):
+            print(f'{i + 1}. {repo_names[i]}')
+        print(f'{len(repo_names) + 1}. All repositories')
+
+        repo_num = int(input(f'Enter a repository number to scrape ({len(repo_names) + 1} for all): ')) - 1
+
+        if repo_num == len(repo_names):
+            print('Scraping all repositories')
+            all_files = RepoProcessing.get_all_files_for_user(args.username)
+            v = find_vulnerabilities(all_files)
+            display_results(v, types)
+        else:
+            print(f'Scraping {repo_names[repo_num]} repository')
+            repo_files = RepoProcessing.get_repo_files(args.username, repo_names[repo_num])
+            print("Recieved files from " +str(args.username) +"/"+ str(repo_names[repo_num]))
+            v = find_vulnerabilities(repo_files)
+            display_results(v, types)
+
