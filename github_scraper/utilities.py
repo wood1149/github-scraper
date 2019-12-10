@@ -1,7 +1,3 @@
-
-api_key_min_entropy_ratio = 0.5
-
-
 def display_results(results, types):
     """Prints the results of vulnerability searches to the terminal
     
@@ -31,7 +27,7 @@ def save_results(results, file_name):
         [:param `file_name`] a string representing the file path where the results will be written
     """
 
-    with open(f'output/{file_name}', mode='x') as fp:
+    with open(f'output/{file_name}', mode='w') as fp:
 
         if results:
             fp.write('The following vulnerabilities were found:\n')
