@@ -6,7 +6,7 @@ from .regex_matching_strings import match_email as MatchEmail
 
 gfilestr = ""
 #takes in a map, runs regex matching on text, and returns type/line number of match
-def main(fileMap, entropy=0.5):
+def main(fileMap, entropy=0.45):
     outputMap = {}
     for key in fileMap:
         outputMap[key] = []
@@ -23,7 +23,7 @@ def getLine(filestr=gfilestr):
       yield filestr[prevnl + 1:nextnl]
       prevnl = nextnl
 
-def findMatches(key,fileString,outputMap,entropy=0.5):
+def findMatches(key,fileString,outputMap,entropy=0.45):
     idx = 1
     for line in fileString.splitlines():
       if(MatchAPI(line,entropy)):

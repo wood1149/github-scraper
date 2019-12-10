@@ -16,7 +16,7 @@ def setup_argparse():
     parser.add_argument('-r', '--repo', help='Repository name')
     parser.add_argument('-s', '--save', help='File name to which output will be saved (within output/ dir). If not provided, results only displayed on console.')
     parser.add_argument('-t', '--token', help='Github API Token')
-    parser.add_argument('--entropy', help='Entropy threshold value, [0.0-1.0] default 0.5', type=float)
+    parser.add_argument('--entropy', help='Entropy threshold value, [0.0-1.0] default 0.45', type=float)
 
     # Check for these vulnerabilities
     vuln_group = parser.add_argument_group('Vulnerability types')
