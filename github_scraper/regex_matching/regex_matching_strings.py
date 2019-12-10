@@ -1,7 +1,24 @@
 import re
-from utilities import entropy
+import math, itertools
 
-ENTROPY_THRESHOLD = .4
+ENTROPY_THRESHOLD = .45
+
+def get_token_pairs(characters):
+    """Returns the mapping of each individual character to the next in the list
+    """
+    a, b = itertools.tee(characters)
+    next(b, None)
+    return zip(a, b)
+
+def entropy(s):
+	"""Returns the entropy of the string s
+	"""
+	e = 0
+	for a, b in get_token_pairs(list(s)):
+		if not ((str.islower(a) and str.islower(b)) or (str.isupper(a) and\
+			str.isupper(b)) or (str.isdigit(a) and str.isdigit(b))):
+			e += 1
+	return float(e) / len(s)
 
 # matches emails
 def match_email(line):
@@ -101,7 +118,7 @@ def match_api_key(line):
     #only letter
     onlyLetters = re.compile(r'^[a-zA-Z]+$')
     regexar = [AWSsecretAccessKey,BITsecretAccessKey,FLsecretAccessKey,AWSsecretAccessKeyAlternative,TWsecretAccessKey,LIsecretAccessKey,FSsecretAccessKey, AWSaccessKeyID]
-    
+
     output = []
     for regex in regexar:
         matches = re.findall(regex,line)
@@ -109,7 +126,7 @@ def match_api_key(line):
             if entropy(m) >= ENTROPY_THRESHOLD:
                 output.append(m)
         # output.extend(re.findall(regex,line))
-    if(len(output) > 0 and onlyLetters.search(output[0]) == None):
+    if(len(output) > 0):
         return True
     return False
 
