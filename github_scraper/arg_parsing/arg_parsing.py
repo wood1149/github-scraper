@@ -15,6 +15,7 @@ def setup_argparse():
     parser.add_argument('-u', '--username', required=True, help='GitHub username')
     parser.add_argument('-r', '--repo', help='Repository name')
     parser.add_argument('-s', '--save', help='File name to which output will be saved (within output/ dir). If not provided, results only displayed on console.')
+    parser.add_argument('-t', '--token', help='Github API Token')
 
     # Check for these vulnerabilities
     vuln_group = parser.add_argument_group('Vulnerability types')
@@ -23,6 +24,9 @@ def setup_argparse():
     vuln_group.add_argument('-e', '--email', help='Look for email addresses', action='store_true')
     vuln_group.add_argument('-b', '--bitcoin', help='Look for bitcoin', action='store_true')
     vuln_group.add_argument('-c', '--crypto', help='Look for cryptographic keys', action='store_true')
+
+
+
     args = parser.parse_args()
     
 
@@ -39,11 +43,15 @@ def setup_argparse():
     else:
         types = {'API', 'Password', 'Email', 'Crypto'}
     
+    if args.token:
+        headers = {'Authorization': f'token {args.token}'}
+    else:
+        headers = {}
 
     if args.repo:
         # Repo name provided
         print(f'Scraping {args.repo} repository')
-        repo_files = RepoProcessing.get_repo_files(args.username, args.repo)
+        repo_files = RepoProcessing.get_repo_files(args.username, args.repo, headers)
         print("Recieved files from " +str(args.username) +"/"+ str(args.repo))
         v = find_vulnerabilities(repo_files)
         display_results(v, types)
@@ -52,7 +60,7 @@ def setup_argparse():
             save_results(v, args.save)
     else:
         print(f'Scraping repositories for user {args.username}')
-        repo_names = RepoProcessing.get_user_repos(args.username)
+        repo_names = RepoProcessing.get_user_repos(args.username, headers)
         print('Repository names:')
         for i in range(len(repo_names)):
             print(f'{i + 1}. {repo_names[i]}')
@@ -62,12 +70,12 @@ def setup_argparse():
 
         if repo_num == len(repo_names):
             print('Scraping all repositories')
-            all_files = RepoProcessing.get_all_files_for_user(args.username)
+            all_files = RepoProcessing.get_all_files_for_user(args.username, headers)
             v = find_vulnerabilities(all_files)
             display_results(v, types)
         else:
             print(f'Scraping {repo_names[repo_num]} repository')
-            repo_files = RepoProcessing.get_repo_files(args.username, repo_names[repo_num])
+            repo_files = RepoProcessing.get_repo_files(args.username, repo_names[repo_num], headers)
             print("Recieved files from " +str(args.username) +"/"+ str(repo_names[repo_num]))
             v = find_vulnerabilities(repo_files)
             display_results(v, types)
