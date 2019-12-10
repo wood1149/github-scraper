@@ -14,6 +14,7 @@ def setup_argparse():
     # Add the CL args
     parser.add_argument('-u', '--username', required=True, help='GitHub username')
     parser.add_argument('-r', '--repo', help='Repository name')
+    parser.add_argument('-s', '--save', help='File name to which output will be saved (within output/ dir). If not provided, results only displayed on console.')
 
     # Check for these vulnerabilities
     vuln_group = parser.add_argument_group('Vulnerability types')
@@ -46,6 +47,9 @@ def setup_argparse():
         print("Recieved files from " +str(args.username) +"/"+ str(args.repo))
         v = find_vulnerabilities(repo_files)
         display_results(v, types)
+
+        if args.save:
+            save_results(v, args.save)
     else:
         print(f'Scraping repositories for user {args.username}')
         repo_names = RepoProcessing.get_user_repos(args.username)

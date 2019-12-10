@@ -41,14 +41,14 @@ def display_results(results, types):
     return
 
 def save_results(results, file_name):
-    """Saves the results of vulnerability searches to a file
+    """Saves the results of vulnerability searches to a file in output/ dir
     
         [:param `results`] a dictionary of key/value pairs, where the key is a file path string, and the value is a list of strings representing vulnerabilities in that file. The vulnerability string is formatted as "type:line_num"
 
         [:param `file_name`] a string representing the file path where the results will be written
     """
 
-    with open(file_name, mode='x') as fp:
+    with open(f'output/{file_name}', mode='x') as fp:
 
         if results:
             fp.write('The following vulnerabilities were found:\n')
