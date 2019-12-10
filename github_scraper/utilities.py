@@ -1,3 +1,24 @@
+import math, itertools
+
+api_key_min_entropy_ratio = 0.5
+
+def get_token_pairs(characters):
+    """Returns the mapping of each individual character to the next in the list
+    """
+    a, b = itertools.tee(characters)
+    next(b, None)
+    return zip(a, b)
+
+def entropy(s):
+	"""Returns the entropy of the string s
+	"""
+	e = 0
+	for a, b in get_token_pairs(list(s)):
+		if not ((str.islower(a) and str.islower(b)) or (str.isupper(a) and\
+			str.isupper(b)) or (str.isdigit(a) and str.isdigit(b))):
+			e += 1
+	return float(e) / len(s)
+
 def display_results(results, types):
     """Prints the results of vulnerability searches to the terminal
     

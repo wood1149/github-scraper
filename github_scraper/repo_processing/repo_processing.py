@@ -6,7 +6,7 @@ BASE_URL = 'https://api.github.com'
 # Used so script ignores binary files
 # We could do another way later if we don't want to list out all extensions we want
 SCRAPABLE_EXTENSIONS = {'cpp', 'txt', 'py', 'config', 'c', 'js', 'html'}
-DIRECTORIES_TO_AVOID = {'node_modules', 'env', 'github_site_data', 'username_data', 'js'}
+DIRECTORIES_TO_AVOID = {'node_modules', 'env', 'github_site_data', 'username_data'}
 
 def get_user_repos(username, headers={}):
     """Gets list of public repositories owned by a particular user

@@ -1,5 +1,7 @@
 import re
+from utilities import entropy
 
+ENTROPY_THRESHOLD = .4
 
 # matches emails
 def match_email(line):
@@ -21,7 +23,10 @@ def match_bitcoin(line):
     
     output = []
     for regex in regexes:
-        output.extend(re.findall(regex,line))
+        matches = re.findall(regex,line)
+        for m in matches:
+            if entropy(m) >= ENTROPY_THRESHOLD:
+                output.append(m)
     if(len(output) > 0):
         return True
     return False
@@ -45,7 +50,10 @@ def match_crypto(line):
 
     output = []
     for regex in regexes:
-        output.extend(re.findall(regex,line))
+        matches = re.findall(regex,line)
+        for m in matches:
+            if entropy(m) >= ENTROPY_THRESHOLD:
+                output.append(m)
     if(len(output) > 0):
         return True
     return False
@@ -69,7 +77,7 @@ def match_password(line):
 #matches API keys
 def match_api_key(line):
     #https://gist.github.com/hsuh/88360eeadb0e8f7136c37fd46a62ee10
-    #AWSaccessKeyID = re.compile(r'(?<![A-Z0-9])[A-Z0-9]{20}(?![A-Z0-9])')
+    AWSaccessKeyID = re.compile(r'(?<![A-Z0-9])[A-Z0-9]{20}(?![A-Z0-9])')
     AWSsecretAccessKey = re.compile(r'(?<![A-Za-z0-9/+=])[A-Za-z0-9/+=]{40}(?![A-Za-z0-9/+=])')
     AWSsecretAccessKeyAlternative = re.compile(r'[0-9a-zA-Z/+]{40}')
     #https://people.eecs.berkeley.edu/~rohanpadhye/files/key_leaks-msr15.pdf
@@ -92,11 +100,15 @@ def match_api_key(line):
 
     #only letter
     onlyLetters = re.compile(r'^[a-zA-Z]+$')
-    regexar = [AWSsecretAccessKey,BITsecretAccessKey,FLsecretAccessKey,AWSsecretAccessKeyAlternative,TWsecretAccessKey,LIsecretAccessKey,FSsecretAccessKey]
+    regexar = [AWSsecretAccessKey,BITsecretAccessKey,FLsecretAccessKey,AWSsecretAccessKeyAlternative,TWsecretAccessKey,LIsecretAccessKey,FSsecretAccessKey, AWSaccessKeyID]
     
     output = []
     for regex in regexar:
-        output.extend(re.findall(regex,line))
+        matches = re.findall(regex,line)
+        for m in matches:
+            if entropy(m) >= ENTROPY_THRESHOLD:
+                output.append(m)
+        # output.extend(re.findall(regex,line))
     if(len(output) > 0 and onlyLetters.search(output[0]) == None):
         return True
     return False
