@@ -56,11 +56,10 @@ def get_repo_files(username, repo_name, headers={}):
 
     repo_files = {}
 
-    try:
-        tree = res['tree']
-    except KeyError as e:
-        print('KeyError from Github Tree request')
-        return {}
+    if 'tree' not in res:
+        return repo_files
+
+    tree = res['tree']
 
     for t in tree:
         if t['type'] == 'blob':
