@@ -24,19 +24,20 @@ def display_results(results, types):
     
         [:param `results`] a dictionary of key/value pairs, where the key is a file path string, and the value is a list of strings representing vulnerabilities in that file. The vulnerability string is formatted as "type:line_num"
     """
-    if results:
-        print('The following vulnerabilities were found:')
+    no_vuln = True
 
-        for file, v_list in results.items():
-            if  v_list:
-                print(file)
-                for v in v_list:
-                    type, _, line = v.partition(':')
-                    if type in types:
-                        print(f' * {type} at line {line}')
-    else:
-        print('No vulnerabilities were found')
+    print('The following vulnerabilities were found: ')
+    for file, v_list in results.items():
+        if  v_list:
+            print(file)
+            for v in v_list:
+                type, _, line = v.partition(':')
+                if type in types:
+                    no_vuln = False
+                    print(f' * {type} at line {line}')
 
+    if no_vuln:
+        print("None")
     return
 
 def save_results(results, file_name):
