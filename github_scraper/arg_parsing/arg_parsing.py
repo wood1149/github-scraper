@@ -16,6 +16,7 @@ def setup_argparse():
     parser.add_argument('-r', '--repo', help='Repository name')
     parser.add_argument('-s', '--save', help='File name to which output will be saved (within output/ dir). If not provided, results only displayed on console.')
     parser.add_argument('-t', '--token', help='Github API Token')
+    parser.add_argument('--entropy', help='Entropy threshold value, [0.0-1.0] default 0.5', type=float)
 
     # Check for these vulnerabilities
     vuln_group = parser.add_argument_group('Vulnerability types')
@@ -28,6 +29,11 @@ def setup_argparse():
 
 
     args = parser.parse_args()
+
+    # Validate entropy argument
+    if args.entropy:
+        if float(args.entropy) > 1 or float(args.entropy) < 0:
+            raise argparse.ArgumentTypeError('Entropy value is not between 0 and 1')
     
 
     if args.api or args.password or args.email or args.bitcoin or args.crypto:
@@ -53,7 +59,10 @@ def setup_argparse():
         print(f'Scraping {args.repo} repository')
         repo_files = RepoProcessing.get_repo_files(args.username, args.repo, headers)
         print("Recieved files from " +str(args.username) +"/"+ str(args.repo))
-        v = find_vulnerabilities(repo_files)
+        if args.entropy:
+            v = find_vulnerabilities(repo_files, args.entropy)
+        else:
+            v = find_vulnerabilities(repo_files)
         display_results(v, types)
 
         if args.save:
@@ -71,12 +80,18 @@ def setup_argparse():
         if repo_num == len(repo_names):
             print('Scraping all repositories')
             all_files = RepoProcessing.get_all_files_for_user(args.username, headers)
-            v = find_vulnerabilities(all_files)
+            if args.entropy:
+                v = find_vulnerabilities(all_files, args.entropy)
+            else:
+                v = find_vulnerabilities(all_files)
             display_results(v, types)
         else:
             print(f'Scraping {repo_names[repo_num]} repository')
             repo_files = RepoProcessing.get_repo_files(args.username, repo_names[repo_num], headers)
-            print("Recieved files from " +str(args.username) +"/"+ str(repo_names[repo_num]))
-            v = find_vulnerabilities(repo_files)
+            print("Received files from " +str(args.username) +"/"+ str(repo_names[repo_num]))
+            if args.entropy:
+                v = find_vulnerabilities(repo_files, args.entropy)
+            else:
+                v = find_vulnerabilities(repo_files)
             display_results(v, types)
 
