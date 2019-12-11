@@ -18,6 +18,7 @@ per_user_data = Counter()
 
 user_count = 0
 
+# Loop through directory for usernames scraped
 for f in os.listdir(username_dir):
     file_path = username_path + '/' + os.fsdecode(f)
     with open(file_path, 'r') as read_file:
@@ -40,7 +41,7 @@ for f in os.listdir(username_dir):
             for key in curr_user_data:
                 per_user_data[key] += 1
 
-
+            # Print data as it runs
             print(f'All Data: {all_data}')
             print(f'Per User Data: {per_user_data}')
             print(f'Username count: {user_count}')
