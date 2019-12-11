@@ -24,6 +24,9 @@ Commandline usage
 ```
 
 **Demo:**
+
+There is a demo repository that was setup to include the different types of vulnerabilities.  This demo repository can be scraped by running the command below.
+
 ```python
     python3 github_scraper -u daphneehuang -r cse4471-demo
 ```
