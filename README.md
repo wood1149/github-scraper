@@ -33,7 +33,7 @@ There is a demo repository that was setup to include the different types of vuln
 
 The vulnerabilities discovered can be checked in the public repository at https://github.com/daphneehuang/cse4471-demo
 
-Also, see the demo file (get-user-data.py) in the root directory to see a basic program on a directory of scraped usernames. This github_scraper module will run the main functionality of finding vulnerable files. The output will be the accumulated data by the scraper on the number of vulnerabilities found, unlike the commandline which will give specific files and line numbers of the vulnerabilities.  A Github API OAuth Token would be needed for running this script on more than a few of the users.
+Also, see the demo file (get-user-data.py) in the root directory to see a basic program that will loop through the entire directory of scraped usernames. This github_scraper module will run the main functionality of finding vulnerable files. The output will be the accumulated data by the scraper on the number of vulnerabilities found, unlike the commandline which will give specific files and line numbers of the vulnerabilities.  A Github API OAuth Token would be needed for running this script on more than a few of the users.
 
 ## Scrape Usernames:
 ```
