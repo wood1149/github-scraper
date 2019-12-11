@@ -6,11 +6,11 @@ from .regex_matching_strings import match_email as MatchEmail
 
 gfilestr = ""
 #takes in a map, runs regex matching on text, and returns type/line number of match
-def main(fileMap):
+def main(fileMap, entropy=0.45):
     outputMap = {}
     for key in fileMap:
         outputMap[key] = []
-        findMatches(key,fileMap[key],outputMap)
+        findMatches(key,fileMap[key],outputMap, entropy)
         
     return outputMap
 
@@ -23,10 +23,10 @@ def getLine(filestr=gfilestr):
       yield filestr[prevnl + 1:nextnl]
       prevnl = nextnl
 
-def findMatches(key,fileString,outputMap):
+def findMatches(key,fileString,outputMap,entropy=0.45):
     idx = 1
     for line in fileString.splitlines():
-      if(MatchAPI(line)):
+      if(MatchAPI(line,entropy)):
         if(len(outputMap[key]) == 0):
           outputMap[key] = ["API:" + str(idx)]
         else:
@@ -38,12 +38,12 @@ def findMatches(key,fileString,outputMap):
         else:
           outputMap[key].append("Password:" + str(idx))
 
-      if(MatchCrypto(line)):
+      if(MatchCrypto(line,entropy)):
         if(len(outputMap[key]) == 0):
           outputMap[key] = ["Crypto:" + str(idx)]
         else:
           outputMap[key].append("Crypto:" + str(idx))
-      if(MatchBitcion(line)):
+      if(MatchBitcion(line,entropy)):
         if(len(outputMap[key]) == 0):
           outputMap[key] = ["Bitcoin:" + str(idx)]
         else:
