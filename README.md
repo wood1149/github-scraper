@@ -7,7 +7,7 @@ This python package primarily deals with finding sensitive data on public github
 
 **Single User**
 
-This tool was made to scrape a single user's repository for accidental secrets exposed. This can be run via commandline or script (see the demo script in the top level directory or see the **Demo** section below for commandline usage)
+This tool was made to scrape a single user's repository for accidental secrets exposed. This can be run via commandline or script (see the demo script in the top level directory or see the **Main Functionality** section below for commandline usage)
 
 **Group Data Collection**
 
