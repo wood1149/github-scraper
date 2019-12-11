@@ -72,14 +72,14 @@ Then
 
 This will extact emails from these github sites. Currently only emails are supported for github sites
 
-## Coder Resources
+## External Resources
 
 Here is some documentation for tools/APIs that are used:
 
 ### GitHub's [API](https://developer.github.com/v3/)
 
-Specifically, the [contents](https://developer.github.com/v3/repos/contents/#get-contents) API. This will let us retrieve information about a specific file, given the username, repo, and filename associated with it. I imagine we will use the `download_url` to get the files in raw format in the browser for easy file scraping.
+Specifically, the [contents](https://developer.github.com/v3/repos/contents/#get-contents) API. This lets us retrieve information about a specific file, given the username, repo, and filename associated with it.
 
 ### nelsonic's [github-scraper](https://github.com/nelsonic/github-scraper)
 
-The extent to which we will be able to use this tool is TBD, but at the very least we can use it to gather a list of popular GitHub users and their repositories.
+Used to gather a list of popular GitHub users and their repositories.
