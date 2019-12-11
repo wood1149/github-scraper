@@ -34,9 +34,27 @@ Commandline usage
 
 The vulnerabilities discovered can be checked in the public repository at https://github.com/daphneehuang/cse4471-demo
 
-**Extra Features:**
+## Scrape Usernames:
+```
+    npm install
+    node scrapeUsers.js
+```
 
-Also included in the "github_site_tools" module there is the ability to scrape github sites found in "github_site_data"
+Run the scrapeUsers.js file to pick what user will be scraped for their usernames.
+
+This tool will allow the user to scrape many usernames from github. Please input a user with many followers, and the tool will output their followers, up to a maximum.
+
+Features in scrapeUsers.js:
+    "usernameToScrape" set user
+    "numUsersToScrape" set limits
+    "operation" 0 to scrape a users followers
+    "operation" 1 to scrape followers of a user (the user must have been scraped by operation 0 first)
+
+> Use the CLI prompts of scrapeUsers.js for the easiest use
+
+## Extra Features:
+
+Also included in the "github_site_tools" module there is the ability to scrape github sites found in "github_site_data." Keep in mind, usernames must have been previously scraped by the scrapeUsers.js file into the ./usernames directory for these additional features to work.
 
 ```python
     from github_scraper.github_site_tools import scrape_githubIO_sites as SGIO
@@ -52,28 +70,6 @@ Then
 ```
 
 This will extact emails from these github sites. Currently only emails are supported for github sites
-
-
-
-## Scrape Usernames:
-```
-    npm install
-    node scrapeUsers.js
-```
-
-Run the scrapeUsers.js file to pick what user will be scraped for their usernames.
-
-This tool will allow the user to scrape many ussernames from github. Please input a user with many followers, and the tool will output their followers, up to a maximum.
-
-Features in scrapeUsers.js:
-    "usernameToScrape" set user
-    "numUsersToScrape" set limits
-    "operation" 0 to scrape a users followers
-    "operation" 1 to scrape followers of a user (the user must have been scraped by operation 0 first)
-
-> Use the CLI prompts of scrapeUsers.js for the easiest use
-
-
 
 ## Coder Resources
 
