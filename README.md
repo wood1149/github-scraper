@@ -16,10 +16,6 @@ This tool also functions as a way to anlyaze a list of usernames for secrets in 
 The first step of identifying secrets is to gather a list of usernames. This functionality detailed in the **Scrape Usernames** section below. This is the only section using Javascript, due to a dependency. The rest of the python library will reference this username list created in ./usernames
 
 **Main Functionality:**
-    
-See the demo file (get-user-data.oy) in the root directory to see a basic program.
-This gitub_scraper module will run the main functionality of finding vulnerable files.
-The output will be the secrets found by the scraper as well as the line numbers
 
 Commandline usage
 
@@ -33,6 +29,8 @@ Commandline usage
 ```
 
 The vulnerabilities discovered can be checked in the public repository at https://github.com/daphneehuang/cse4471-demo
+
+Also, see the demo file (get-user-data.py) in the root directory to see a basic program on a directory of scraped usernames. This github_scraper module will run the main functionality of finding vulnerable files. The output will be the accumulated data by the scraper on the number of vulnerabilities found, unlike the commandline which will give specific files and line numbers of the vulnerabilities.  A Github API OAuth Token would be needed for running this script on more than a few of the users.
 
 ## Scrape Usernames:
 ```
