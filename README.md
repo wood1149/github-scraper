@@ -28,7 +28,11 @@ Commandline usage
 ```
 
 **Demo:**
+```python
+    python3 github_scraper -u daphneehuang -r cse4471-demo
+```
 
+The vulnerabilities discovered can be checked in the public repository at https://github.com/daphneehuang/cse4471-demo
 
 **Extra Features:**
 
