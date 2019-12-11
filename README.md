@@ -17,7 +17,7 @@ The first step of identifying secrets is to gather a list of usernames. This fun
 
 **Main Functionality:**
     
-See the demo file in the root directory for examples.
+See the demo file (get-user-data.oy) in the root directory to see a basic program.
 This gitub_scraper module will run the main functionality of finding vulnerable files.
 The output will be the secrets found by the scraper as well as the line numbers
 
