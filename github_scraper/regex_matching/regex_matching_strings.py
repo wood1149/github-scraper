@@ -30,7 +30,7 @@ def match_email(line):
     return False
 
 # matches Bitcoin private key, URI, extended public key
-def match_bitcoin(line): 
+def match_bitcoin(line,entropy_val=ENTROPY_THRESHOLD): 
     bitcoinAddress = re.compile(r'[13][a-km-zA-HJ-NP-Z1-9]{25,34}')
     bitcoinURI = re.compile(r'bitcoin:([13][a-km-zA-HJ-NP-Z1-9]{25,34})')
     bitcoinExtendedPublicKey = re.compile(r'(xpub[a-km-zA-HJ-NP-Z1-9]{100,108})(\\?c=\\d*&h=bip\\d{2,3})?')
@@ -42,14 +42,14 @@ def match_bitcoin(line):
     for regex in regexes:
         matches = re.findall(regex,line)
         for m in matches:
-            if entropy(m) >= ENTROPY_THRESHOLD:
+            if entropy(m) >= entropy_val:
                 output.append(m)
     if(len(output) > 0):
         return True
     return False
 
 # matches cryptokeys
-def match_crypto(line):
+def match_crypto(line, entropy_val=ENTROPY_THRESHOLD):
     # keys in hex
     # 56-64 bit keys (DES)
     hex64bit = re.compile(r'[a-fA-F0-9]{14,16}')
@@ -69,7 +69,7 @@ def match_crypto(line):
     for regex in regexes:
         matches = re.findall(regex,line)
         for m in matches:
-            if entropy(m) >= ENTROPY_THRESHOLD:
+            if entropy(m) >= entropy_val:
                 output.append(m)
     if(len(output) > 0):
         return True
@@ -92,7 +92,7 @@ def match_password(line):
     return False
 
 #matches API keys
-def match_api_key(line):
+def match_api_key(line,entropy_val=ENTROPY_THRESHOLD):
     #https://gist.github.com/hsuh/88360eeadb0e8f7136c37fd46a62ee10
     AWSaccessKeyID = re.compile(r'(?<![A-Z0-9])[A-Z0-9]{20}(?![A-Z0-9])')
     AWSsecretAccessKey = re.compile(r'(?<![A-Za-z0-9/+=])[A-Za-z0-9/+=]{40}(?![A-Za-z0-9/+=])')
@@ -123,7 +123,7 @@ def match_api_key(line):
     for regex in regexar:
         matches = re.findall(regex,line)
         for m in matches:
-            if entropy(m) >= ENTROPY_THRESHOLD:
+            if entropy(m) >= entropy_val:
                 output.append(m)
         # output.extend(re.findall(regex,line))
     if(len(output) > 0):
