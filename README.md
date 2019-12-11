@@ -27,6 +27,7 @@ Commandline usage
     python3 github_scraper -h
 ```
 
+**Demo:**
 
 
 **Extra Features:**
